@@ -1,0 +1,360 @@
+\documentclass[a4paper,12pt,reqno]{amsart}
+\usepackage{macros_M66}
+
+\begin{document}
+\hautdepage{TD1: Interpolation et splines}
+
+% ==================================
+\section{Interpolation}
+% ==================================
+
+
+%-------------------------------------
+\begin{exo} (Différences divisées)
+
+Soient $x_0,x_1,\ldots,x_n$ des points distincts d'un intervalle $I$, et $f$,$g$ et $h$ des applications réelles définies sur cette intervalle. On note par $f[x_{0},x_{1},\ldots,x_{n}]$ la différence divisée de $f$ en $x_0,x_1,\ldots,x_n$.
+  \begin{enumerate}
+    \item
+      \begin{enumerate}
+        \item Démontrer l'identité
+          $$
+            f[x_{0},x_{1},\ldots,x_{n}] =
+              \sum_{j=0}^{n} f(x_{j}) \prod_{\substack{k=0 \\ k\neq j}}^{n}
+                \frac{1}{x_{k} - x_{j}}\,.
+          $$
+
+        \item En déduire que la différence divisée $f[x_{0},x_{1},\ldots,x_{n}]$ est une fonction symétrique, c'est-à-dire, que pour toute permutation $\sigma$ de l'ensemble $\{0,\ldots,n\}$ dans lui même,
+          $$
+            f[x_{\sigma(0)},x_{\sigma(1)},\ldots,x_{\sigma(n)}] = f[x_{0},x_{1},\ldots,x_{n}]
+          $$
+      \end{enumerate}
+
+    \item Si $f = \alpha g + \beta h$ pour certains $\alpha ,\beta \in \mathbb{R}$, alors
+      $$
+        f[x_{0},\ldots,x_{n}] = \alpha g[x_{0},\ldots,x_{n}] + \beta h[x_{0},\ldots,x_{n}]\,.
+      $$
+
+    \item Si $f = gh$, alors on a la formule suivante (appelée formule de Leibniz):
+      $$
+        f[x_{0},\ldots,x_{n}] = \sum_{j=0}^{n} g[x_{0},\ldots,x_{j}]h[x_{j},\ldots,x_{n}]\,.
+      $$
+  \end{enumerate}
+\end{exo}
+
+
+%-----------------------------------
+\begin{exo} (Interpolation quadratique)
+  \begin{enumerate}
+    \item Soit $I$ un intervalle et $f\in C^3(I)$. On note $p_2(x)$ le polynôme de degré $\leq 2$ qui interpole la fonction $f$ aux points $x_i=x_0+ih \in I$ pour $i=0,1,2$. Montrer que
+      $$
+        \forall x\in [x_0, x_2] \quad
+          | {f(x)-p_2(x)} | \leq \frac{h^3}{9\sqrt{3}}M,
+      $$
+    où $M$ est une constante ne dépendant que de la restriction de $f$ à $I$.
+
+  \item On veut construire une table de valeurs de la fonction $f(x)=\sqrt{x+1}$ dans l'intervalle $[0,1]$ pour des points équidistants $x_{i+1}=x_i+h$.\newline
+  Quelle valeur doit prendre $h$ pour garantir $7$ chiffres décimaux corrects en faisant une interpolation quadratique?
+  \end{enumerate}
+\end{exo}
+
+%-------------------------------------
+\begin{exo} (Interpolation d'Hermite)
+
+  On se donne $n+1$ abscisses distinctes $x_0, x_1, \ldots , x_n$.
+  On considère les polynômes $U_i(x)$ et $V_i(x)$ , $0\leq i\leq n$, de degré $2n+1$ qui vérifient les conditions suivantes:
+  \begin{equation}\label{eq}
+    \begin{array}{lcll}
+      U_i(x_k)=\delta_{ik} & ; & U_i'(x_k)=0           & i,k=0,\ldots,n\\
+      V_i(x_k)=0           & ; & V_i'(x_k)=\delta_{ik} & i,k=0,\ldots,n
+    \end{array}
+  \end{equation}
+  \begin{enumerate}
+    \item Quelles conditions d'interpolation vérifie le polynôme
+      $$
+        p(x)=\sum_{i=0}^n U_i(x)y_i +\sum_{i=0}^nV_i(x)y_i' ?
+      $$
+    \item En sachant que les polynômes de la base de Lagrange associée aux nœuds $x_i$ vérifient $L_i(x_k)=\delta_{ik}$, montrer que
+      \begin{eqnarray*}
+        U_i(x) &=& \left[ 1-2L_i'(x_i)(x-x_i)\right](L_i(x))^2\\
+        V_i(x) &=& (x-x_i)(L_i(x))^2
+      \end{eqnarray*}
+    vérifient les conditions (\ref{eq}).
+    \item Une déviation entre deux voies de chemin de fer parallèles doit être un polynôme de degré 3 qui unit les positions $(0,0)$ et $(4,2)$ et est tangent dans ces points, aux droites $y=0$ et $y=2$ respectivement. Appliquer la formule précédente pour obtenir ce polynôme.
+    \item Soit $y(x)$ une fonction dans $C^{2n+2}[a,b]$ et telle que
+      \begin{eqnarray*}
+        y(x_i)  &=& y_i\\
+        y'(x_i) &=& y'_i\ \ i=0,\ldots,n
+      \end{eqnarray*}
+    avec $x_i\in [a,b]$. On peut montrer que l'erreur que l'on commet quand on remplace $y(x)$ par le polynôme d'interpolation $p(x)$ est donnée par
+    $$
+      y(x)-p(x)=\frac{y^{(2n+2)}(\eta)}{(2n+2)!}[\pi (x)]^2
+        \mbox{ avec } \pi(x)\prod_{j=0}^n (x-x_j).
+    $$
+    On considère le cas particulier de $n=1$ et la fonction $y(x)=...$. Majorer l'erreur $y(x)-p(x)$ dans l'intervalle $[1,2]$.
+  \end{enumerate}
+\end{exo}
+
+
+%-------------------------------------
+\begin{exo} (Interpolation polynomiale par morceaux)
+
+  Soit $f$ une fonction de classe ${\mathcal{C}}^2$ sur l'intervalle $I=[0,1]$. Soit $H(x)$ un polynôme de degré $\le 3$ tel que
+  $$
+    \left\{
+      \begin{array}{lcl}
+        H(0)  &=& f(0)\\
+        H(1)  &=& f(1)\\
+        H'(0) &=& f'(0)\\
+        H'(1) &=& f'(1)
+      \end{array}
+    \right.
+  $$
+  \begin{enumerate}
+    \item Montrer qu'un tel polynôme existe et est unique.
+    \item On suppose maintenant que $f$ est de classe ${\mathcal{C}}^4$ sur $I$. On définit la fonction $S(x)$ par la relation
+      $$
+        f(x)=H(x)+x^2(x-1)^2S(x).
+      $$
+    \begin{enumerate}
+      \item Soit $x$ fixé dans $I$. On introduit la fonction $F$ définie par
+        $$
+          F(t)=f(t)-H(t)-t^2(t-1)^2S(x)
+        $$
+      \begin{enumerate}
+        \item Montrer que $F(t)$ s'annule en (au moins) 3 points distincts que l'on explicitera.
+        \item Montrer qu'il existe 2 réels distincts $t^1_1$ et $t^1_2$ tels que
+          $$
+            F'(t^1_1)=F'(t^1_2)=0.
+          $$
+      \end{enumerate}
+      \item Calculer $F'(t)$, $F'(0)$, $F'(1)$.\\
+      En déduire qu'il existe (au moins) 4 réels distincts $t^2_i$, $i=1,2,3,4$ tels que
+        $$
+          F'(t^2_i)=0, \forall  \ i=1, \cdots , 4.
+        $$
+      \item En déduire alors qu'il existe un réel $\xi_x \in I$ tel que
+        $$
+          S(x)=\frac{f^{(4)}(\xi_x)}{4!}.
+        $$
+      \item Donner alors une majoration de l'erreur d'interpolation $|f(x)-H(x)|$.\\
+      {\it (Indication: On pourra utiliser l'inégalité suivante :}
+      $$
+        %\mbox{Max}_{ (\ x \ \in [0,1] \ )}
+        \operatorname{Max}_{x \in [0,1]}
+        \left|{\textstyle
+          x\left( x-\frac {1}{n}\right)\left( x-\frac {2}{n}\right)
+          \cdots \left( x-\frac {n-1}{n}\right)\left( x-1\right)
+        }\right|
+        \leq \frac{1}{2^{n+1}} ,\quad \forall n \ge 1. )
+      $$
+    \end{enumerate}
+    \item On considère les 4 points $\left\{x_i\right\}_{i=1}^4$ définis par
+    $$
+    x_i=\frac{i-1}{3}, \ i=1,2,3,4.
+    $$
+    Soit $P(x)$ le polynôme d'interpolation de Newton
+    de $f(x)$ aux points $x_i$. La fonction $f$ est toujours supposée
+    de classe ${\mathcal{C}}^4$ sur $I$.
+    \begin{enumerate}
+      \item Donner une majoration de l'erreur d'interpolation
+      $|f(x)-P_n(x)|$.
+      \item Comparer cette majoration avec celle obtenue dans la question
+      (b) iv.
+    \end{enumerate}
+  \end{enumerate}
+\end{exo}
+
+
+% ==================================
+\section{Méthode des moindres carrés}
+% ==================================
+
+
+%-------------------------------------
+\begin{exo} (Droite de régression)
+
+  Considérons les données $\{(x_{i} ,y_{i}) \,|\, i = 0,\ldots,n\}$ où $y_{i}$ peut être vue comme la valeur $f(x_{i})$ prise par une fonction $f$ au noeud $x_{i}$ .
+
+  Soit
+    $$
+      \Phi(b_{0} ,b_{1}) =
+        \sum_{i=0}^{n} \big[y_{i} - (b_{0} + b_{1} x_{i})\big]^{2}.
+    $$
+
+  \begin{enumerate}
+    \item Déterminer $b_{0}$ et $b_{1}$ qui minimise $\Phi$.
+
+    La droite ainsi déterminée $x \mapsto b_{0} + b_{1} x$, est dite \emph{droite des moindres carrés}, ou \emph{de régression linéaire}. Elle est la solution de regrée $1$ du problème des moindres carrées pour les données $\{(x_{i} ,y_{i})\}$.
+
+    \item Exprimer ces coefficients en fonction de la moyenne $M = \frac1{(n+1)} \sum_{i=0}^{n} x_{i}$  et de la variance $V = \frac1{(n+1)} \sum_{i=0}^{n} (x_{i}-M)^{2}$.
+    \item  Vérifier que la droite de régression linéaire passe par le point dont l'abscisse est la moyenne des $\{x_{i}\}$ et l'ordonnée est la moyenne des $\{y_{i}\}$.
+  \end{enumerate}
+
+
+\end{exo}
+
+%-------------------------------------
+\begin{exo} (Le cas général)
+
+  Étant donnée $\{(x_{i} ,y_{i}) \,|\, i = 0,\ldots,n\}$, une solution du problème des moindres carrées de degré $m$ est la donnée d'un polynôme $P \in \mathbb{P}_{m}[\mathbb{R}]$ qui minimise la quantité:
+    $$
+        \sum_{i=0}^{n} \big[y_{i} - P(x^{i})\big]^{2}.
+    $$
+
+  \begin{enumerate}
+    \item Montrer que pour $m=n$ il y a une solution unique et déterminer la.
+    \item Que peut on dire dire de l'ensemble des solution dans le cas $m>n$ ?
+    \item On munit $\mathbb{P}_{m}[\mathbb{R}]$ de la base canonique $1,X,\ldots,X^{m}$. Soit $P=(a_{0},\ldots,a_{n})$ les coordonnées de $P$ dans cette base. Soit la matrice $V_{m}=\left[x_{i}^{k}\right]_{\substack{i=0,\ldots,n\\ k=0,\ldots,m}}$ et le vecteur $Y=(y_{0},\ldots,y_{n})$. En considérant $P$ et $V_{m}$ comme des vecteurs colonnes, montrer que
+      $$
+        \sum_{i=0}^{n} \big[y_{i} - P(x^{i})\big]^{2} = \big\| V_{m}P-Y \big\|_{2}^{2}.
+      $$
+    \item Montrer que pour $m \leq n$ la solution du problème des moindres carrées existe et est unique.
+    \item Justifié que $V_{n}$ est inversible, puis montrer que les coefficients du polynôme de Lagrange sont les coefficients du vecteur $V_{n}^{-1}Y$.
+    \item Redémontrer la question b) en utilisant la question c).
+  \end{enumerate}
+\end{exo}
+
+
+% ==================================
+\section{Splines}
+% ==================================
+
+%-------------------------------------
+\begin{exo} (Base de splines)
+
+  Soient $a=x_0 < x_1 < \cdots < x_{n}=b$ des points de l'intervalle $[a,b]$ et $\mathcal{S}_{k}[a,b]$ l'ensemble des splines de degré $k$ relativement à ces $(n+1)$ points. Vérifier que tout $s_{k} \in \mathcal{S}_{k}[a,b]$ admet une écriture de la forme
+  $$
+    s_{k}(x) = \sum_{i=0}^{k} b_{i}x^{i} + \sum_{i=1}^{n-1} c_{i}(x - x_{i})_{+}^{k}\,,
+  $$
+  où $(t)_{+}=\frac{t+|t|}{2}$ et $(t)_{+}^{k}=\left[(t)_{+}\right]^{k}$. Puis conclure que
+    $$
+      \{1,x,x^{2},\ldots,x^{k},(x-x_{1})_{+}^{k},\ldots,(x-x_{n-1})_{+}^{k}\}
+    $$
+  est une base de $\mathcal{S}_{k}[a,b]$.
+\end{exo}
+
+
+%-------------------------------------
+\begin{exo} (Splines normalisées)
+
+  Soit $a=x_{0}<x_{2}<\cdots<x_{n}=b$ les $n+1$ nœuds des splines cubiques $\mathcal{S}_{3}(Y)$ qui interpolent les valeurs $Y=(y_{0},y_{1},\ldots,y_{n})$.
+  \begin{enumerate}
+    \item Montrer qu'il existe une unique spline $s \in \mathcal{S}_{3}(Y)$, dit \emph{naturelle}, telle que $s''(a)=s''(b)=0$.
+
+    \item Étant donnés deux nombre $d_{a}$ et $d_{b}$, montrer qu'il existe une unique spline $s \in \mathcal{S}_{3}(Y)$, dit \emph{serrée} ou \emph{tendue}, telle que $s'(a)=d_{a}$ et $s'(b)=d_{b}$.
+
+    \item Si $y_{0}=y_{n}$, montrer qu'il existe une unique spline $s \in \mathcal{S}_{3}(Y)$, dit \emph{cyclique} ou \emph{périodique}, telle que $s^{(k)}(a)=s^{(k)}(b)$ pour $k=0,1,2$.
+  \end{enumerate}
+\end{exo}
+
+
+%-------------------------------------
+\begin{exo} (Propriété de la norme minimale)
+  \begin{enumerate}
+    \item Soit $f \in C^{2}([a,b])$, et soit $s_{3}$ une spline cubique \textit{naturelle} qui interpole $f$ aux noeuds $\Delta=\{a=x_{0}<x_{2}<\cdots<x_{n}=b\}$. Montrer que
+      $$
+        \int_{a}^{b} [s_{3}''(x)]^{2} dx \leq \int_{a}^{b} [f''(x)]^{2} dx
+      $$
+    avec égalité si et seulement si $f=s_{3}$.\newline
+    \textit{Indication:} Commencer par la formule
+    $$
+      \int_{a}^{b} [f''(x)-s_{3}''(x)]s_{3}''(x) dx
+        = \sum_{1}^{n}\int_{x_{i-1}}^{x_{i}} [f''(x)-s_{3}''(x)]s_{3}''(x) dx
+    $$
+
+    \item Montrer que la propriété précédente est vrai également pour les splines \emph{serrées} qui satisfont $s_{3}'(a)=f'(a)$ et $s_{3}'(b)=f'(b)$.
+
+    \item Soit $\Delta^{*}$ un sous-ensemble de l'ensemble $\Delta$ des nœuds, et $s_{3}^{*}$ la spline naturelle (resp. serrée) qui interpole $f$ en $\Delta^{*}$. Montrer que
+      $$
+        \int_{a}^{b} [(s_{3}^{*})''(x)]^{2} dx \leq \int_{a}^{b} [s_{3}''(x)]^{2} dx
+      $$
+    avec égalité si et seulement si $s_{3}$ est un polynôme au voisinage des nœuds manquant à $\Delta^{*}$.
+
+  \end{enumerate}
+\end{exo}
+
+
+
+%-------------------------------------
+\begin{exo} (Splines quartique)
+
+  Soit $f \in C^{4}([a,b])$, et soit $s_{4}$ une spline de degré $4$ qui interpole $f$ aux nœuds $\{a=x_{0}<x_{2}<\cdots<x_{n}=b\}$. Montrer que
+      $$
+        ||f''-s_{4}'' ||_{L^{2}[a,b]}^{2} \leq \int_{a}^{b} [f(x)-s_{4}(x)]f^{4}(x) dx
+      $$
+    si l'une des conditions suivante est vérifiée:
+    \begin{enumerate}
+      \item $f'(a)=s_{4}'(a)$ et $f'(b)=s_{4}'(b)$;
+      \item $f''(a)=s_{4}''(a)$ et $f''(b)=s_{4}''(b)$;
+      \item $f^{(i)}$ et $s_{4}^{(i)}$ sont périodiques pour $i \leq 2$.
+    \end{enumerate}
+\end{exo}
+
+%-------------------------------------
+\begin{exo} (Splines cubiques à peu de nœuds)
+
+  Soit $a=x_{0}<x_{2}<\cdots<x_{n}=b$ les $n+1$ nœuds des splines cubiques $\mathcal{S}_{3}$. Soit $s \in \mathcal{S}_{3}$ qui satisfait les conditions aux bords $s^{(k)}(a)=s^{(k)}(b)=0$ pour $k=0,1,2$.
+  \begin{enumerate}
+    \item Montrer que si $n < 4$ alors $s=0$.
+
+    \item Montrer que si $n=4$ alors $s$ est uniquement déterminée par sa valeur en $x_{2}$.
+  \end{enumerate}
+
+\end{exo}
+
+%-------------------------------------
+\begin{exo} (Bases cardinale des splines cubiques)
+
+  Soit $a=x_{0}<x_{2}<\cdots<x_{n}=b$ les $n+1$ nœuds des splines cubiques $\mathcal{S}_{3}$.
+
+  Pour $i=0,\ldots,n$ on note par $\varphi_{i}$ la spline naturelle telle que $\varphi_{i}(x_{j})=\delta_{ij}$. Ainsi que les deux splines tendues $\varphi_{k}$ pour $k \in \{n+1,n+2\}$ définies par $\varphi_{k}(x_{i})=0$ pour $\forall i=0,\ldots,n$, $\varphi_{n+1}'(x_{0})=1$, $\varphi_{n+1}'(x_{n})=0$, $\varphi_{n+2}'(x_{0})=0$ et $\varphi_{n+2}'(x_{n})=1$.
+  \begin{enumerate}
+    \item Montrer que les $\{\varphi_{k}\}_{k=0,\ldots,n+2}$ forment une base de $\mathcal{S}_{3}$.\newline
+    Cette base est appeler \emph{base cardinales}.
+    \item Soit $x_{i}=i$ pour $i=0,1,2$. Calculer la base cardinale dans ce cas.
+  \end{enumerate}
+\end{exo}
+
+%-------------------------------------
+\begin{exo} (B-splines)
+
+  Soit $a=x_{0}<x_{2}<\cdots<x_{n}=b$ les $n+1$ nœuds des splines $\mathcal{S}_{k}$ de degré $k$. Soit les fonctions $B_{i,j}$ définies par récurrence comme suit
+    $$
+      \left\{
+      \begin{array}{rll}
+        B_{i,0}(x) & =
+          \Bigg\{
+          \begin{array}{rl}
+            1 & \text{ si } x \in [x_{i},x_{i+1}]\\
+            0 & \text{ sinon }
+          \end{array}               & \text{ pour } i=0,\ldots,n-1\\[3ex]
+        B_{i,k}(x) & = \frac{x-x_{i}}{x_{i+k}-x_{i}}B_{i,k-1}(x)
+                  + \frac{x_{i+k+1}-x}{x_{i+k+1}-x_{i+1}}B_{i+1,k-1}(x)
+                                    & \text{ pour }
+                                      \left\{
+                                        \begin{array}{r}
+                                          \forall\ k \geq 1, i \geq 0\\
+                                           i+k+1 \leq n
+                                        \end{array}
+                                      \right.
+      \end{array}
+      \right.
+    $$\vspace{0pt}
+  \begin{enumerate}
+    \item Calculer et tracer les $B_{i,1}$ pour $i=0,\ldots,n-2$.
+    \item Montrer que la restriction des $B_{i,1}$ à $I_{1}=[x_{1},x_{n-1}]$ est une base de $1$-splines respectivement aux nœuds $\{x_{1},\ldots,x_{n-1}\}$.
+    \item Montrer que le support de $B_{i,k}$ est contenu dans $[x_{i},x_{i+k+1}]$.
+    \item Montrer que
+      $$
+        B_{i,k}(x) = (x_{i+k+1}-x_{i})
+            \sum_{j=0}^{k+1}
+              \frac{(x_{i+j}-x)_{+}^{k}}{\displaystyle\prod_{\substack{m=0 \\ m\neq j}}^{m=k+1}(x_{i+j}-x_{i+m})}
+      $$
+    \item En déduire que les $B_{i,k}$ sont des splines de degré $k$ linéairement indépendant.\newline
+      On appelle les $B_{i,k}$ les \emph{B-splines} de degré $k$.
+    \item Soit $I_{k}=[x_{k},x_{n-k}]$ et  $\mathcal{S}_{k}[I_{k}]$ les splines de degré $k$ sur $I_{k}$ ayant pour nœuds $\{x_{k},\ldots,x_{n-k}\}$. Montrer $\{\left.B_{i,k}\right|_{I_{k}} \,|\, i=-k+1,\ldots,n-1 \}$ forme une base de $\mathcal{S}_{k}[I_{k}]$.
+    \item Comment peut on construire une base de $\mathcal{S}_{k}$ avec des B-splines ?
+  \end{enumerate}
+\end{exo}
+
+\end{document}
