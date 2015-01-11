@@ -222,7 +222,7 @@ ymax/.store in=\ymax, ymax/.default=3, ymax=3,
 % -- la commande mtlb sans bordure
 \newcommand{\mtlb}[1]{\lstinline!#1!}
 % -- la commande mtlbbox comme mtlb mais avec une boite
-\newcommand{\mtlbbox}[1]{\tikz[anchor=base, baseline]{\node[draw=mtlbtext,rounded corners=3pt,top color=white,bottom color=mtlbtext!10,minimum width=7mm]{\vphantom{H}{\lstinline!#1!}\vphantom{p}};}}
+\newcommand{\mtlbbox}[1]{\tikz[anchor=base, baseline]{\node[draw=mtlbtext,rounded corners=2.1pt,fill=mtlbtext!3,minimum width=7mm]{\vphantom{H}{\lstinline!#1!}\vphantom{p}};}}
 % -- l'environement matlab, peut être utiliser dans minipage
 \lstnewenvironment{matlab}
     {\lstset{
@@ -235,7 +235,7 @@ ymax/.store in=\ymax, ymax/.default=3, ymax=3,
     }{}
 % -- les commande dans l'IDE de Matlab
 \newcommand{\cmd}[1]{{\color{cmdtext}\texttt{#1}}}
-\newcommand{\cmdbox}[1]{\tikz[anchor=base, baseline]{\node[draw=cmdtext!50,rounded corners=3pt,top color=white,bottom color=cmdtext!10]{\vphantom{H}\cmd{#1}\vphantom{p}};}}
+\newcommand{\cmdbox}[1]{\tikz[anchor=base, baseline]{\node[draw=cmdtext!50,rounded corners=2.1pt,fill=cmdtext!7]{\vphantom{H}\cmd{#1}\vphantom{p}};}}
 
 % -- notion
 \newcommand{\notion}[1]{{\color{notion}\textsf{#1}}}
