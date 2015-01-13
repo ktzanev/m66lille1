@@ -79,41 +79,13 @@ Soient $x_0,x_1,\ldots,x_n$ des points distincts d'un intervalle $I$, et $f$,$g$
         V_i(x) &=& (x-x_i)(L_i(x))^2
       \end{eqnarray*}
     vérifient les conditions (\ref{eq}).
-    \item Une déviation entre deux voies de chemin de fer parallèles doit être un polynôme de degré 3 qui unit les positions $(0,0)$ et $(4,2)$ et est tangent dans ces points, aux droites $y=0$ et $y=2$ respectivement. Appliquer la formule précédente pour obtenir ce polynôme.
-    \item Soit $y(x)$ une fonction dans $C^{2n+2}[a,b]$ et telle que
-      \begin{eqnarray*}
-        y(x_i)  &=& y_i\\
-        y'(x_i) &=& y'_i\ \ i=0,\ldots,n
-      \end{eqnarray*}
-    avec $x_i\in [a,b]$. On peut montrer que l'erreur que l'on commet quand on remplace $y(x)$ par le polynôme d'interpolation $p(x)$ est donnée par
-    $$
-      y(x)-p(x)=\frac{y^{(2n+2)}(\eta)}{(2n+2)!}[\pi (x)]^2
-        \mbox{ avec } \pi(x)\prod_{j=0}^n (x-x_j).
-    $$
-    On considère le cas particulier de $n=1$ et la fonction $y(x)=...$. Majorer l'erreur $y(x)-p(x)$ dans l'intervalle $[1,2]$.
-  \end{enumerate}
-\end{exo}
-
-
-%-------------------------------------
-\begin{exo} (Interpolation polynomiale par morceaux)
-
-  Soit $f$ une fonction de classe ${\mathcal{C}}^2$ sur l'intervalle $I=[0,1]$. Soit $H(x)$ un polynôme de degré $\le 3$ tel que
-  $$
-    \left\{
-      \begin{array}{lcl}
-        H(0)  &=& f(0)\\
-        H(1)  &=& f(1)\\
-        H'(0) &=& f'(0)\\
-        H'(1) &=& f'(1)
-      \end{array}
-    \right.
-  $$
-  \begin{enumerate}
-    \item Montrer qu'un tel polynôme existe et est unique.
-    \item On suppose maintenant que $f$ est de classe ${\mathcal{C}}^4$ sur $I$. On définit la fonction $S(x)$ par la relation
+    \item On considère le cas particulier de $n=1$, l'intervalle $I=[0,1]$ et soient $x_0=0$ et $x_1=1$.Soit $f(x)$ une fonction dans $C^4(I)$ et telle que
       $$
-        f(x)=H(x)+x^2(x-1)^2S(x).
+        f(x_i)=y_i, \qquad  f'(x_i)=y'_i, \qquad i=0,1.
+      $$
+    On définit la fonction $S(x)$ par la relation
+      $$
+        f(x)=p(x)+x^2(x-1)^2S(x).
       $$
     \begin{enumerate}
       \item Soit $x$ fixé dans $I$. On introduit la fonction $F$ définie par
@@ -148,22 +120,11 @@ Soient $x_0,x_1,\ldots,x_n$ des points distincts d'un intervalle $I$, et $f$,$g$
         \leq \frac{1}{2^{n+1}} ,\quad \forall n \ge 1. )
       $$
     \end{enumerate}
-    \item On considère les 4 points $\left\{x_i\right\}_{i=1}^4$ définis par
-    $$
-    x_i=\frac{i-1}{3}, \ i=1,2,3,4.
-    $$
-    Soit $P(x)$ le polynôme d'interpolation de Newton
-    de $f(x)$ aux points $x_i$. La fonction $f$ est toujours supposée
-    de classe ${\mathcal{C}}^4$ sur $I$.
-    \begin{enumerate}
-      \item Donner une majoration de l'erreur d'interpolation
-      $|f(x)-P_n(x)|$.
-      \item Comparer cette majoration avec celle obtenue dans la question
-      (b) iv.
-    \end{enumerate}
+
+    \item \textit{Application:} une déviation entre deux voies de chemin de fer parallèles doit être un polynôme de degré 3 qui unit les positions $(0,0)$ et $(4,2)$ et est tangent dans ces points, aux droites $y=0$ et $y=2$ respectivement. Obtenir ce polynôme. Utiliser la question précédente pour majorer l'erreur $|f(x)-p(x)|$ dans l'intervalle $[1,2]$.
+
   \end{enumerate}
 \end{exo}
-
 
 % ==================================
 \section{Méthode des moindres carrés}
@@ -173,7 +134,7 @@ Soient $x_0,x_1,\ldots,x_n$ des points distincts d'un intervalle $I$, et $f$,$g$
 %-------------------------------------
 \begin{exo} (Droite de régression)
 
-  Considérons les données $\{(x_{i} ,y_{i}) \,|\, i = 0,\ldots,n\}$ où $y_{i}$ peut être vue comme la valeur $f(x_{i})$ prise par une fonction $f$ au noeud $x_{i}$ .
+  Considérons les données $\{(x_{i} ,y_{i}) \,|\, i = 0,\ldots,n\}$ où $y_{i}$ peut être vue comme la valeur $f(x_{i})$ prise par une fonction $f$ au nœud $x_{i}$ .
 
   Soit
     $$
@@ -184,9 +145,9 @@ Soient $x_0,x_1,\ldots,x_n$ des points distincts d'un intervalle $I$, et $f$,$g$
   \begin{enumerate}
     \item Déterminer $b_{0}$ et $b_{1}$ qui minimise $\Phi$.
 
-    La droite ainsi déterminée $x \mapsto b_{0} + b_{1} x$, est dite \emph{droite des moindres carrés}, ou \emph{de régression linéaire}. Elle est la solution de regrée $1$ du problème des moindres carrées pour les données $\{(x_{i} ,y_{i})\}$.
+    La droite ainsi déterminée $x \mapsto b_{0} + b_{1} x$, est dite \emph{droite des moindres carrés}, ou \emph{de régression linéaire}. Elle est la solution de degré $1$ du problème des moindres carrées pour les données $\{(x_{i} ,y_{i})\}$.
 
-    \item Exprimer ces coefficients en fonction de la moyenne $M = \frac1{(n+1)} \sum_{i=0}^{n} x_{i}$  et de la variance $V = \frac1{(n+1)} \sum_{i=0}^{n} (x_{i}-M)^{2}$.
+    \item Exprimer les coefficients $b_{0}$ et $b_{1}$ en fonction de la moyenne $M = \frac1{(n+1)} \sum_{i=0}^{n} x_{i}$  et de la variance $V = \frac1{(n+1)} \sum_{i=0}^{n} (x_{i}-M)^{2}$.
     \item  Vérifier que la droite de régression linéaire passe par le point dont l'abscisse est la moyenne des $\{x_{i}\}$ et l'ordonnée est la moyenne des $\{y_{i}\}$.
   \end{enumerate}
 
@@ -198,15 +159,15 @@ Soient $x_0,x_1,\ldots,x_n$ des points distincts d'un intervalle $I$, et $f$,$g$
 
   Étant donnée $\{(x_{i} ,y_{i}) \,|\, i = 0,\ldots,n\}$, une solution du problème des moindres carrées de degré $m$ est la donnée d'un polynôme $P \in \mathbb{P}_{m}[\mathbb{R}]$ qui minimise la quantité:
     $$
-        \sum_{i=0}^{n} \big[y_{i} - P(x^{i})\big]^{2}.
+        \sum_{i=0}^{n} \big[y_{i} - P(x_{i})\big]^{2}.
     $$
 
   \begin{enumerate}
     \item Montrer que pour $m=n$ il y a une solution unique et déterminer la.
-    \item Que peut on dire dire de l'ensemble des solution dans le cas $m>n$ ?
-    \item On munit $\mathbb{P}_{m}[\mathbb{R}]$ de la base canonique $1,X,\ldots,X^{m}$. Soit $P=(a_{0},\ldots,a_{n})$ les coordonnées de $P$ dans cette base. Soit la matrice $V_{m}=\left[x_{i}^{k}\right]_{\substack{i=0,\ldots,n\\ k=0,\ldots,m}}$ et le vecteur $Y=(y_{0},\ldots,y_{n})$. En considérant $P$ et $V_{m}$ comme des vecteurs colonnes, montrer que
+    \item Que peut on dire de l'ensemble des solutions dans le cas $m>n$ ?
+    \item On munit $\mathbb{P}_{m}[\mathbb{R}]$ de la base canonique $1,X,\ldots,X^{m}$. Soit $(a_{0},\ldots,a_{n})$ les coordonnées de $P$ dans cette base et $\overline{P}=(a_{0},\ldots,a_{n}) \in \mathbb{R}^{n}$ ça représentation dans $\mathbb{R}^{n}$. Soit la matrice $V_{m}=\left[x_{i}^{k}\right]_{\substack{i=0,\ldots,n\\ k=0,\ldots,m}}$ et le vecteur $Y=(y_{0},\ldots,y_{n})$. En considérant $\overline{P}$ et $Y$ comme des vecteurs colonnes, montrer que
       $$
-        \sum_{i=0}^{n} \big[y_{i} - P(x^{i})\big]^{2} = \big\| V_{m}P-Y \big\|_{2}^{2}.
+        \sum_{i=0}^{n} \big[y_{i} - P(x^{i})\big]^{2} = \big\| V_{m}\overline{P}-Y \big\|_{2}^{2}.
       $$
     \item Montrer que pour $m \leq n$ la solution du problème des moindres carrées existe et est unique.
     \item Justifié que $V_{n}$ est inversible, puis montrer que les coefficients du polynôme de Lagrange sont les coefficients du vecteur $V_{n}^{-1}Y$.
@@ -298,19 +259,21 @@ Soient $x_0,x_1,\ldots,x_n$ des points distincts d'un intervalle $I$, et $f$,$g$
     \item Montrer que si $n < 4$ alors $s=0$.
 
     \item Montrer que si $n=4$ alors $s$ est uniquement déterminée par sa valeur en $x_{2}$.
+
+    \item Calculer explicitement $s$ dans le cas des nœuds $\{-2,-1,0,1,2\}$ en fonction de sa valeur $c$ en $0$.
   \end{enumerate}
 
 \end{exo}
 
 %-------------------------------------
-\begin{exo} (Bases cardinale des splines cubiques)
+\begin{exo} (Base cardinale des splines cubiques)
 
   Soit $a=x_{0}<x_{2}<\cdots<x_{n}=b$ les $n+1$ nœuds des splines cubiques $\mathcal{S}_{3}$.
 
   Pour $i=0,\ldots,n$ on note par $\varphi_{i}$ la spline naturelle telle que $\varphi_{i}(x_{j})=\delta_{ij}$. Ainsi que les deux splines tendues $\varphi_{k}$ pour $k \in \{n+1,n+2\}$ définies par $\varphi_{k}(x_{i})=0$ pour $\forall i=0,\ldots,n$, $\varphi_{n+1}'(x_{0})=1$, $\varphi_{n+1}'(x_{n})=0$, $\varphi_{n+2}'(x_{0})=0$ et $\varphi_{n+2}'(x_{n})=1$.
   \begin{enumerate}
     \item Montrer que les $\{\varphi_{k}\}_{k=0,\ldots,n+2}$ forment une base de $\mathcal{S}_{3}$.\newline
-    Cette base est appeler \emph{base cardinales}.
+    Cette base est appeler \emph{base cardinale}.
     \item Soit $x_{i}=i$ pour $i=0,1,2$. Calculer la base cardinale dans ce cas.
   \end{enumerate}
 \end{exo}
