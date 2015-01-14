@@ -1,0 +1,119 @@
+\documentclass[a4paper,12pt,reqno]{amsart}
+\usepackage{macros_M66}
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hautdepage{TP1: Interpolation polynomiale}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Vous êtes invités à télécharger le fichier \cmd{tp1\_fonction.sci} à partir de moodle, puis de le compléter au fur et à mesure avec les nouvelles procédures. Pour chaque exercices il va falloir créer un fichier, \cmd{tp1\_exo1.sce}, \cmd{tp1\_exo2.sce} et \cmd{tp1\_exo3.sce}, comportant les lignes de code correspondant à la résolution de l'exercice et incluant au début le fichier \cmd{tp1\_fonction.sci} et les autres initialisations habituelles (\mtlb{clear},\mtlb{clc},\ldots).
+
+\attention{center}{En cas de blocage, commencez toujours par regarder l'aide ou sur Google !!}
+
+
+% ==================================
+\section{Présentation et indications}
+% ==================================
+
+Soient $n+1$ points distincts $(x_i)_{0 \leq i \leq n}$ de $\R$, et $f$ une fonction réelle définie en chacun de ces points. Nous cherchons à construire le polynôme d'interpolation de Lagrange $p_n$ de degré au plus égal à $n$ tel que $p_n(x_i)=f(x_i)$ pour $ 0 \leq i \leq n$. On exprime ce polynôme dans sa base de Newton, sous la forme:
+    $$
+        p_n(x)= f[x_0]+ \sum_{i=1}^n f[x_0,\ldots,x_i] \prod_{k=0}^{i-1} (x-x_k).
+    $$
+
+L'année dernière, en L2, vous avez déjà travaillé sur ce problème en Scilab. Pour ne pas devoir refaire le même travail, on vous fournit dans le fichier \cmd{tp1\_fonction.sci} deux fonctions :
+\begin{enumerate}
+     \item \mtlb{function [cfs]=DiffDiv(xdata,ydata)} qui à partir des points $\{x_0,\ldots,x_n\}$ contenus dans \mtlb{xdata} et des valeurs de la fonctions $\{f(x_0),\ldots,f(x_n)\}$ contenus dans \mtlb{ydata}, retourne les différences divisée \mtlb{cfs}$=\{f[x_0],\ldots,f[x_0,\ldots,x_n]\}$.
+     \item \mtlb{function [y]=HornerNewton(cfs,xdata,t)} qui à partir des différences divisée \mtlb{cfs} et les points \mtlb{xdata}, retourne la valeur du polynôme d'interpolation évalué au point \mtlb{t}.
+ \end{enumerate}
+
+
+% ==================================
+\section{Exercices}
+% ==================================
+
+% --------------------------------------------
+\begin{exo} (Vérification de l'interpolation)
+
+  \begin{enumerate}
+    \item Commencer par crée le fichier \cmd{tp1\_exo1.sce} qui sera initialisé par les commandes suivantes : \mtlb{clc}, \mtlb{clear}, \mtlb{xdel(winsid())}, \mtlb{exec('tp1_fonctions.sci')}. Commenter ces commandes.
+
+    \item Créer dans ce même fichier la fonction polynomiale $f_{1}(x)=x^{2}+2x$, nommée \mtlb{f1}. Puis vérifier qu'elle fonctionne.
+
+    \item Dans le fichier \cmd{tp1\_fonction.sci} créer la procédure
+    \begin{center}
+      \mtlb{function PlotFunction(f,a,prec)}
+    \end{center}
+    qui trace la fonction \mtlb{f} sur l'intervalle \mtlb{[-a,a]} avec un pas de précision \mtlb{prec}. Tester cette procédure (dans \cmd{tp1\_exo1.sce}) avec la fonction $f_{1}$.
+
+    \item Dans le fichier \cmd{tp1\_fonction.sci} créer la procédure
+    \begin{center}
+      \mtlb{function PlotInterpUnif(f,a,k,prec)}
+    \end{center}
+    qui trace, avec un pas de précision \mtlb{prec}, le polynôme d'interpolation uniforme\footnote{c'est-à-dire, dont les points d'interpolations sont équidistants.} de degré au plus \mtlb{k} de \mtlb{f} sur l'intervalle \mtlb{[-a,a]}.
+
+    \item Sur la même figure tracer la fonctions $f_{1}$ sur $[-3,3]$ et ces polynômes d'interpolation uniforme $p_{k}$ de degré majoré par $k=0,..,10$. Que constaté-vous ?
+
+    \item Écrire un test qui imprime le degré du polynôme $p_{10}$. Pour cela on peut ce servir des fonctions \mtlb{find}, \mtlb{max}, et \mtlb{sprintf}.\newline
+    \textit{On vous rappelle qu'un nombre très petit (voir la constante \mtlb{\%eps}) en analyse numérique est considéré comme $0$.}
+
+
+  \end{enumerate}
+\end{exo}
+
+
+% --------------------------------------------
+\begin{exo} (Phénomène de Runge)
+
+  Soit $f \in {\mathcal{C}}^{n+1}([a,b])$. On rappelle le résultat :
+  $$
+    \forall x \in [a,b], \exists \; \zeta \in [a,b] \; ; \;  f(x)-p_n(x)=\frac{f^{(n+1)}(\zeta)}{(n+1)!} \prod_{i=0}^n (x-x_i).
+  $$
+
+  \begin{enumerate}
+    \item Dans le fichier \cmd{tp1\_fonction.sci} créer la procédure
+    \begin{center}
+      \mtlb{function PlotErrInterpUnif(f,a,deg,prec)}
+    \end{center}
+    qui calcul l'erreur $\| f - p_{k} \|_{\infty}$ d'interpolation sur \mtlb{[-a,a]}, en utilisant la fonction \mtlb{norm} avec un pas de précision \mtlb{prec}, pour les degrés $k$ prescrits dans le vecteurs \mtlb{deg}. Puis tracer ces erreurs en fonctions du degré.\newline
+    Par exemple la commande \mtlb{PlotErrInterpUnif(f,3,[10:20],.1)} doit calculer et tracer les erreurs d'approximation (calculés avec un pas de précision \mtlb{.1}) de \mtlb{f} sur \mtlb{[-3,3]} par les polynômes $p_{10},\ldots,p_{20}$.
+
+    \item Créer la fonction $f_{2}(x)=\sin(\pi x)$, appelé \mtlb{f2}, dans le fichier \cmd{tp1\_exo2.sce}. N'oublier pas d'initialiser ce fichier au début, comme vous l'avez fait pour \cmd{tp1\_exo1.sce}.
+
+    \item Tracer cette fonction sur $[-2,2]$ ainsi que ces interpolations pour les degrés $k=20,\ldots,30$ sur le même graphique.
+
+    \item Tracer l'erreur d'interpolation uniforme de $f_{2}$ pour les degrés $[0,1,\ldots,50]$. Est-ce prévisible ? Quelle est le résultat théorique qu'on peut annoncer.
+
+    \item Soit $f_{3}=\frac{1}{1+x^{2}}$. Refaire les même calculs que pour $f_{2}$.
+
+    \item Puis élargir l'intervalle de $[-2,2]$ à $[-5,5]$. Que constate t-on ? Comment l'expliquer ?
+  \end{enumerate}
+\end{exo}
+
+
+% --------------------------------------------
+\begin{exo} (Abscisses de Tchebychev)
+
+  Étant donné un entier $n \in \N^*$ et un intervalle $[a,b]$, on rappelle que les $n$ abscisses de Tchebychev dans $[a,b]$ sont donnés par:
+  $$
+    x_i=\frac{a+b}{2}+\frac{b-a}{2} \hat{x}_i, \mbox{ où } \hat{x}_i=\cos\left(\displaystyle \frac{(2i+1)}{2n} \pi \right), \quad i=0,...,n-1.
+  $$
+  \begin{enumerate}
+
+    \item Dans le fichier \cmd{tp1\_fonction.sci} créer la procédure
+    \begin{center}
+      \mtlb{function [v]=tcheb(a,b,n)}
+    \end{center}
+    qui renvoie les \mtlb{n} abscisses de Tchebychev dans \mtlb{[a,b]}.
+
+    \item Modifier (copier/coller + renommer + modifier) les fonctions\\
+    \mtlb{PlotInterpUnif} $\longrightarrow$ \mtlb{PlotInterpTcheb}\\
+    \mtlb{PlotErrInterpUnif} $\longrightarrow$ \mtlb{PlotErrInterpTcheb}\\
+    de sorte que l'interpolation se fasse au niveau des abscisses de Tchebychev.
+
+    \item Étudier comme dans l'exercice précédent la convergence des interpolations de Tchebychev pour la fonction $f_{3}$. Que constatez-vous ?
+  \end{enumerate}
+\end{exo}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
