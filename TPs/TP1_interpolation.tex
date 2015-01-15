@@ -15,7 +15,7 @@ Vous êtes invités à télécharger le fichier \cmd{tp1\_fonction.sci} à parti
 \section{Présentation et indications}
 % ==================================
 
-Soient $n+1$ points distincts $(x_i)_{0 \leq i \leq n}$ de $\R$, et $f$ une fonction réelle définie en chacun de ces points. Nous cherchons à construire le polynôme d'interpolation de Lagrange $p_n$ de degré au plus égal à $n$ tel que $p_n(x_i)=f(x_i)$ pour $ 0 \leq i \leq n$. On exprime ce polynôme dans sa base de Newton, sous la forme:
+Soient $n+1$ points distincts $(x_i)_{0 \leq i \leq n}$ de $[a,b] \subset \R$, et $f$ une fonction réelle définie sur $[a,b]$. Nous cherchons à construire le polynôme d'interpolation de Lagrange $p_n$ de degré au plus égal à $n$ tel que $p_n(x_i)=f(x_i)$ pour $ 0 \leq i \leq n$. On exprime ce polynôme dans sa base de Newton, sous la forme:
     $$
         p_n(x)= f[x_0]+ \sum_{i=1}^n f[x_0,\ldots,x_i] \prod_{k=0}^{i-1} (x-x_k).
     $$
@@ -51,7 +51,7 @@ L'année dernière, en L2, vous avez déjà travaillé sur ce problème en Scila
     \end{center}
     qui trace, avec un pas de précision \mtlb{prec}, le polynôme d'interpolation uniforme\footnote{c'est-à-dire, dont les points d'interpolations sont équidistants.} de degré au plus \mtlb{k} de \mtlb{f} sur l'intervalle \mtlb{[-a,a]}.
 
-    \item Sur la même figure tracer la fonctions $f_{1}$ sur $[-3,3]$ et ces polynômes d'interpolation uniforme $p_{k}$ de degré majoré par $k=0,..,10$. Que constaté-vous ?
+    \item Sur la même figure tracer la fonctions $f_{1}$ sur $[-3,3]$ et ces polynômes d'interpolation uniforme $p_{k}$ de degré majoré par $k=0,..,10$. Que constatez-vous ?
 
     \item Écrire un test qui imprime le degré du polynôme $p_{10}$. Pour cela on peut ce servir des fonctions \mtlb{find}, \mtlb{max}, et \mtlb{sprintf}.\newline
     \textit{On vous rappelle qu'un nombre très petit (voir la constante \mtlb{\%eps}) en analyse numérique est considéré comme $0$.}
@@ -74,12 +74,12 @@ L'année dernière, en L2, vous avez déjà travaillé sur ce problème en Scila
     \begin{center}
       \mtlb{function PlotErrInterpUnif(f,a,deg,prec)}
     \end{center}
-    qui calcul l'erreur $\| f - p_{k} \|_{\infty}$ d'interpolation sur \mtlb{[-a,a]}, en utilisant la fonction \mtlb{norm} avec un pas de précision \mtlb{prec}, pour les degrés $k$ prescrits dans le vecteurs \mtlb{deg}. Puis tracer ces erreurs en fonctions du degré.\newline
-    Par exemple la commande \mtlb{PlotErrInterpUnif(f,3,[10:20],.1)} doit calculer et tracer les erreurs d'approximation (calculés avec un pas de précision \mtlb{.1}) de \mtlb{f} sur \mtlb{[-3,3]} par les polynômes $p_{10},\ldots,p_{20}$.
+    qui, après avoir déterminé le polynôme d'interpolation uniforme $p_k$, calcule l'erreur d'interpolation $\| f - p_{k} \|_{\infty}$ sur \mtlb{[-a,a]} en utilisant la fonction \mtlb{norm} avec un pas de précision \mtlb{prec}, pour les degrés $k$ prescrits dans le vecteurs \mtlb{deg}. Puis tracer ces erreurs (en échelle $\log$) en fonctions du degré.\newline
+    Par exemple la commande \mtlb{PlotErrInterpUnif(f,3,[10:20],.1)} doit calculer et tracer les erreurs d'approximation (calculées avec un pas de précision \mtlb{.1}) de \mtlb{f} sur \mtlb{[-3,3]} pour les polynômes $p_{10},\ldots,p_{20}$.
 
     \item Créer la fonction $f_{2}(x)=\sin(\pi x)$, appelé \mtlb{f2}, dans le fichier \cmd{tp1\_exo2.sce}. N'oublier pas d'initialiser ce fichier au début, comme vous l'avez fait pour \cmd{tp1\_exo1.sce}.
 
-    \item Tracer cette fonction sur $[-2,2]$ ainsi que ces interpolations pour les degrés $k=20,\ldots,30$ sur le même graphique.
+    \item Tracer cette fonction sur $[-2,2]$ ainsi que ses polynômes interpolations pour les degrés $k=20,\ldots,30$ sur le même graphique.
 
     \item Tracer l'erreur d'interpolation uniforme de $f_{2}$ pour les degrés $[0,1,\ldots,50]$. Est-ce prévisible ? Quelle est le résultat théorique qu'on peut annoncer.
 
