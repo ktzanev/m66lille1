@@ -71,7 +71,7 @@ Soient $x_0,x_1,\ldots,x_n$ des points distincts d'un intervalle $I$, et $f$,$g$
   \begin{enumerate}
     \item Quelles conditions d'interpolation vérifie le polynôme
       $$
-        p(x)=\sum_{i=0}^n U_i(x)y_i +\sum_{i=0}^nV_i(x)y_i' ?
+        H(x)=\sum_{i=0}^n U_i(x)y_i +\sum_{i=0}^nV_i(x)y_i'\quad ?
       $$
     \item En sachant que les polynômes de la base de Lagrange associée aux nœuds $x_i$ vérifient $L_i(x_k)=\delta_{ik}$, montrer que
       \begin{eqnarray*}
@@ -83,12 +83,12 @@ Soient $x_0,x_1,\ldots,x_n$ des points distincts d'un intervalle $I$, et $f$,$g$
       $$
         f(x_i)=y_i, \qquad  f'(x_i)=y'_i, \qquad i=0,1.
       $$
-    On définit la fonction $S(x)$ par la relation
+    On définit la fonction $S(x)$, pour $x \in \mathring{I}$, par la relation
       $$
-        f(x)=p(x)+x^2(x-1)^2S(x).
+        f(x)=H(x)+x^2(x-1)^2S(x).
       $$
     \begin{enumerate}
-      \item Soit $x$ fixé dans $I$. On introduit la fonction $F$ définie par
+      \item Soit $x$ fixé dans $\mathring{I}$. On introduit la fonction $F$ définie par
         $$
           F(t)=f(t)-H(t)-t^2(t-1)^2S(x)
         $$
@@ -104,24 +104,14 @@ Soient $x_0,x_1,\ldots,x_n$ des points distincts d'un intervalle $I$, et $f$,$g$
         $$
           F'(t^2_i)=0, \forall  \ i=1, \cdots , 4.
         $$
-      \item En déduire alors qu'il existe un réel $\xi_x \in I$ tel que
+      \item En déduire alors qu'il existe un réel $\xi_x \in \mathring{I}$ tel que
         $$
           S(x)=\frac{f^{(4)}(\xi_x)}{4!}.
         $$
       \item Donner alors une majoration de l'erreur d'interpolation $|f(x)-H(x)|$.\\
-      {\it (Indication: On pourra utiliser l'inégalité suivante :}
-      $$
-        %\mbox{Max}_{ (\ x \ \in [0,1] \ )}
-        \operatorname{Max}_{x \in [0,1]}
-        \left|{\textstyle
-          x\left( x-\frac {1}{n}\right)\left( x-\frac {2}{n}\right)
-          \cdots \left( x-\frac {n-1}{n}\right)\left( x-1\right)
-        }\right|
-        \leq \frac{1}{2^{n+1}} ,\quad \forall n \ge 1. )
-      $$
     \end{enumerate}
 
-    \item \textit{Application:} une déviation entre deux voies de chemin de fer parallèles doit être un polynôme de degré 3 qui unit les positions $(0,0)$ et $(4,2)$ et est tangent dans ces points, aux droites $y=0$ et $y=2$ respectivement. Obtenir ce polynôme. Utiliser la question précédente pour majorer l'erreur $|f(x)-p(x)|$ dans l'intervalle $[1,2]$.
+    \item \textit{Application:} Une déviation entre deux voies de chemin de fer parallèles doit être une fonction $f \in C^{4}\left([0,4]\right)$ qui unit les positions $(0,0)$ et $(4,2)$ et est tangent dans ces points, aux droites $y=0$ et $y=2$ respectivement. Déterminer le polynôme $H$ de degré $\leq 3$ qui satisfait les mêmes conditions. Utiliser la question précédente pour majorer l'erreur $|f(x)-H(x)|$ dans l'intervalle $[1,2]$.
 
   \end{enumerate}
 \end{exo}
