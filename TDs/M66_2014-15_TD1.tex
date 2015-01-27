@@ -20,7 +20,7 @@ Soient $x_0,x_1,\ldots,x_n$ des points distincts d'un intervalle $I$, et $f$,$g$
           $$
             f[x_{0},x_{1},\ldots,x_{n}] =
               \sum_{j=0}^{n} f(x_{j}) \prod_{\substack{k=0 \\ k\neq j}}^{n}
-                \frac{1}{x_{k} - x_{j}}\,.
+                \frac{1}{x_{j} - x_{k}}\,.
           $$
 
         \item En déduire que la différence divisée $f[x_{0},x_{1},\ldots,x_{n}]$ est une fonction symétrique, c'est-à-dire, que pour toute permutation $\sigma$ de l'ensemble $\{0,\ldots,n\}$ dans lui même,
@@ -45,7 +45,7 @@ Soient $x_0,x_1,\ldots,x_n$ des points distincts d'un intervalle $I$, et $f$,$g$
 %-----------------------------------
 \begin{exo} (Interpolation quadratique)
   \begin{enumerate}
-    \item Soit $I$ un intervalle et $f\in C^3(I)$. On note $p_2(x)$ le polynôme de degré $\leq 2$ qui interpole la fonction $f$ aux points $x_i=x_0+ih \in I$ pour $i=0,1,2$. Montrer que
+    \item Soit $I$ un intervalle et $f\in C^3(I)$. Soit $h>0$, on note $p_2(x)$ le polynôme de degré $\leq 2$ qui interpole la fonction $f$ aux points $x_i=x_0+ih \in I$ pour $i=0,1,2$. Montrer que
       $$
         \forall x\in [x_0, x_2] \quad
           | {f(x)-p_2(x)} | \leq \frac{h^3}{9\sqrt{3}}M,
@@ -137,7 +137,7 @@ Soient $x_0,x_1,\ldots,x_n$ des points distincts d'un intervalle $I$, et $f$,$g$
 
     La droite ainsi déterminée $x \mapsto b_{0} + b_{1} x$, est dite \emph{droite des moindres carrés}, ou \emph{de régression linéaire}. Elle est la solution de degré $1$ du problème des moindres carrées pour les données $\{(x_{i} ,y_{i})\}$.
 
-    \item Exprimer les coefficients $b_{0}$ et $b_{1}$ en fonction de la moyenne $M = \frac1{(n+1)} \sum_{i=0}^{n} x_{i}$  et de la variance $V = \frac1{(n+1)} \sum_{i=0}^{n} (x_{i}-M)^{2}$.
+    \item Exprimer les coefficients $b_{0}$ et $b_{1}$ en fonction des moyennes $M = \frac1{(n+1)} \sum_{i=0}^{n} x_{i}$ et\newline $N = \frac1{(n+1)} \sum_{i=0}^{n} y_{i}$, de la variance $V = \frac1{(n+1)} \sum_{i=0}^{n} (x_{i}-M)^{2}$ et de la covariance\newline $C = \frac1{(n+1)} \sum_{i=0}^{n} (x_{i}-M)(y_{i}-N)$.
     \item  Vérifier que la droite de régression linéaire passe par le point dont l'abscisse est la moyenne des $\{x_{i}\}$ et l'ordonnée est la moyenne des $\{y_{i}\}$.
   \end{enumerate}
 
@@ -157,7 +157,7 @@ Soient $x_0,x_1,\ldots,x_n$ des points distincts d'un intervalle $I$, et $f$,$g$
     \item Que peut on dire de l'ensemble des solutions dans le cas $m>n$ ?
     \item On munit $\mathbb{P}_{m}[\mathbb{R}]$ de la base canonique $1,X,\ldots,X^{m}$. Soit $(a_{0},\ldots,a_{n})$ les coordonnées de $P$ dans cette base et $\overline{P}=(a_{0},\ldots,a_{n}) \in \mathbb{R}^{n}$ ça représentation dans $\mathbb{R}^{n}$. Soit la matrice $V_{m}=\left[x_{i}^{k}\right]_{\substack{i=0,\ldots,n\\ k=0,\ldots,m}}$ et le vecteur $Y=(y_{0},\ldots,y_{n})$. En considérant $\overline{P}$ et $Y$ comme des vecteurs colonnes, montrer que
       $$
-        \sum_{i=0}^{n} \big[y_{i} - P(x^{i})\big]^{2} = \big\| V_{m}\overline{P}-Y \big\|_{2}^{2}.
+        \sum_{i=0}^{n} \big[y_{i} - P(x_{i})\big]^{2} = \big\| V_{m}\overline{P}-Y \big\|_{2}^{2}.
       $$
     \item Montrer que pour $m \leq n$ la solution du problème des moindres carrées existe et est unique.
     \item Justifié que $V_{n}$ est inversible, puis montrer que les coefficients du polynôme de Lagrange sont les coefficients du vecteur $V_{n}^{-1}Y$.
