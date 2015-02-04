@@ -227,11 +227,11 @@ Soient $x_0,x_1,\ldots,x_n$ des points distincts d'un intervalle $I$, et $f$,$g$
 
 
 %-------------------------------------
-\begin{exo} (Splines quartique)
+\begin{exo} (Splines quartiques)
 
   Soit $f \in C^{4}([a,b])$, et soit $s_{4}$ une spline de degré $4$ qui interpole $f$ aux nœuds $\{a=x_{0}<x_{2}<\cdots<x_{n}=b\}$. Montrer que
       $$
-        ||f''-s_{4}'' ||_{L^{2}[a,b]}^{2} \leq \int_{a}^{b} [f(x)-s_{4}(x)]f^{4}(x) dx
+        ||f''-s_{4}'' ||_{L^{2}[a,b]}^{2} \leq \int_{a}^{b} [f(x)-s_{4}(x)]f^{(4)}(x) dx
       $$
     si l'une des conditions suivante est vérifiée:
     \begin{enumerate}
