@@ -222,12 +222,12 @@ ymax/.store in=\ymax, ymax/.default=3, ymax=3,
     language=scilab,
     basicstyle=\color{mtlbtext}\ttfamily,
     keywordstyle=\color{mtlbcmd}\bfseries,
-    morekeywords={clc, ones, repmat, numel, switch, inline, @}
+    morekeywords={clc, ones, repmat, numel, switch, inline, @, data_bounds, gca}
 }
 % -- la commande mtlb sans bordure
-\newcommand{\mtlb}[1]{\lstinline!#1!}
+\newcommand{\mtlb}[1]{\nofrench@punctuation\lstinline!#1!\french@punctuation}
 % -- la commande mtlbbox comme mtlb mais avec une boite
-\newcommand{\mtlbbox}[1]{\tikz[anchor=base, baseline]{\node[draw=mtlbtext,rounded corners=2.1pt,fill=mtlbtext!3,minimum width=7mm]{\vphantom{H}{\lstinline!#1!}\vphantom{p}};}}
+\newcommand{\mtlbbox}[1]{\tikz[anchor=base, baseline]{\node[draw=mtlbtext,rounded corners=2.1pt,fill=mtlbtext!3,minimum width=7mm]{\vphantom{H}{\nofrench@punctuation\lstinline!#1!\french@punctuation}\vphantom{p}};}}
 % -- l'environement matlab, peut être utiliser dans minipage
 \lstnewenvironment{matlab}
     {\lstset{
@@ -237,7 +237,8 @@ ymax/.store in=\ymax, ymax/.default=3, ymax=3,
                 framesep=7pt,
                 rulecolor=\color{gray}
             }
-    }{}
+      \nofrench@punctuation
+    }{\french@punctuation}
 % -- les commande dans l'IDE de Matlab
 \newcommand{\cmd}[1]{{\color{cmdtext}\texttt{#1}}}
 \newcommand{\cmdbox}[1]{\tikz[anchor=base, baseline]{\node[draw=cmdtext!50,rounded corners=2.1pt,fill=cmdtext!7]{\vphantom{H}\cmd{#1}\vphantom{p}};}}
