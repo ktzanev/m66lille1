@@ -1,0 +1,40 @@
+\documentclass[varwidth,border=7mm]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{arrows.meta}
+\tikzset{
+  int/.style={
+    decoration={brace,mirror,raise=5pt},
+    postaction={decorate,draw,blue,-},
+  },
+  intname/.style = {pos=.5,below=11pt,blue,inner sep=0},
+  pt/.style={above left,inner sep=2pt,font=\small},
+  val/.style={left,inner sep=1pt}
+}
+\begin{document}
+  \begin{tikzpicture}
+    \draw[int,|-|] (0,0) node[pt]{$a=x_{0}$}-- +(1,0) node[intname]{$I_1$} node[pt]{$x_{1}$};
+    \draw[dashed,gray] (0,0) -- +(0,2) coordinate(v1);
+
+    \draw[int,-|] (1,0) -- +(1,0) node[intname]{$I_2$} node[pt]{$x_{2}$};
+    \draw[dashed,gray] (1,0) -- +(0,1) coordinate(v2);
+
+    \draw[dotted,thick] (2,0) -- +(1,0);
+    \draw[dashed,gray] (2,0) -- +(0,1.5) coordinate(v3);
+
+    \draw[int,|-|] (3,0) -- +(1,0) node[intname](Ik){$I_k$} node[pt]{$x_{k}$};
+    \draw[dashed,gray] (3,0) -- +(0,1) coordinate(vk);
+    \draw[dashed,gray] (4,0) -- +(0,1.7) coordinate(vk1);
+
+
+    \draw[dotted,thick] (4,0) -- +(1,0);
+
+    \draw[int,|-|] (5,0) -- +(1,0) node[intname]{$I_n$} node[pt,above right]{$x_{n}=b$};
+    \draw[dashed,gray] (5,0) -- +(0,1.5) coordinate(vn);
+
+    \draw[dashed,gray] (5,0) ++(1,0) -- +(0,1) coordinate(vn1);
+
+    \draw[thick, red, smooth] plot coordinates {(v1) (v2) (v3) (vk) (vk1) (vn) (vn1)};
+    \path[red] (vn1) node[above]{$f$};
+  \end{tikzpicture}
+\end{document}
