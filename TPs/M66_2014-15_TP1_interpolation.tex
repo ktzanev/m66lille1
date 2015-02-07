@@ -6,7 +6,7 @@
 \hautdepage{TP1: Interpolation polynomiale}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Vous êtes invités à télécharger le fichier \cmd{tp1\_fonction.sci} à partir de moodle, puis de le compléter au fur et à mesure avec les nouvelles procédures. Pour chaque exercices il va falloir créer un fichier, \cmd{tp1\_exo1.sce}, \cmd{tp1\_exo2.sce} et \cmd{tp1\_exo3.sce}, comportant les lignes de code correspondant à la résolution de l'exercice et incluant au début le fichier \cmd{tp1\_fonction.sci} et les autres initialisations habituelles (\mtlb{clear},\mtlb{clc},\ldots).
+Vous êtes invités à télécharger le fichier \cmd{tp1\_fonction.sci} à partir de moodle, puis de le compléter au fur et à mesure avec les nouvelles procédures. Pour chaque exercices il va falloir créer un fichier, \cmd{tp1\_exo1.sce}, \cmd{tp1\_exo2.sce} et \cmd{tp1\_exo3.sce}, comportant les lignes de code correspondant à la résolution de l'exercice et incluant au début le fichier \cmd{tp1\_fonction.sci} et les autres initialisations habituelles (\sclb{clear},\sclb{clc},\ldots).
 
 \attention{center}{En cas de blocage, commencez toujours par regarder l'aide ou sur Google !!}
 
@@ -22,8 +22,8 @@ Soient $n+1$ points distincts $(x_i)_{0 \leq i \leq n}$ de $[a,b] \subset \R$, e
 
 L'année dernière, en L2, vous avez déjà travaillé sur ce problème en Scilab. Pour ne pas devoir refaire le même travail, on vous fournit dans le fichier \cmd{tp1\_fonction.sci} deux fonctions :
 \begin{enumerate}
-     \item \mtlb{function [cfs]=DiffDiv(xdata,ydata)} qui à partir des points $\{x_0,\ldots,x_n\}$ contenus dans \mtlb{xdata} et des valeurs de la fonctions $\{f(x_0),\ldots,f(x_n)\}$ contenus dans \mtlb{ydata}, retourne les différences divisée \mtlb{cfs}$=\{f[x_0],\ldots,f[x_0,\ldots,x_n]\}$.
-     \item \mtlb{function [y]=HornerNewton(cfs,xdata,t)} qui à partir des différences divisée \mtlb{cfs} et les points \mtlb{xdata}, retourne la valeur du polynôme d'interpolation évalué au point \mtlb{t}.
+     \item \sclb{function [cfs]=DiffDiv(xdata,ydata)} qui à partir des points $\{x_0,\ldots,x_n\}$ contenus dans \sclb{xdata} et des valeurs de la fonctions $\{f(x_0),\ldots,f(x_n)\}$ contenus dans \sclb{ydata}, retourne les différences divisée \sclb{cfs}$=\{f[x_0],\ldots,f[x_0,\ldots,x_n]\}$.
+     \item \sclb{function [y]=HornerNewton(cfs,xdata,t)} qui à partir des différences divisée \sclb{cfs} et les points \sclb{xdata}, retourne la valeur du polynôme d'interpolation évalué au point \sclb{t}.
  \end{enumerate}
 
 
@@ -35,28 +35,28 @@ L'année dernière, en L2, vous avez déjà travaillé sur ce problème en Scila
 \begin{exo} (Vérification de l'interpolation)
 
   \begin{enumerate}
-    \item Commencer par crée le fichier \cmd{tp1\_exo1.sce} qui sera initialisé par les commandes suivantes : \mtlb{clc}, \mtlb{clear}, \mtlb{xdel(winsid())}, \mtlb{exec('tp1_fonctions.sci')}. Commenter ces commandes.
+    \item Commencer par crée le fichier \cmd{tp1\_exo1.sce} qui sera initialisé par les commandes suivantes : \sclb{clc}, \sclb{clear}, \sclb{xdel(winsid())}, \sclb{exec('tp1_fonctions.sci')}. Commenter ces commandes.
 
-    \item Créer dans ce même fichier la fonction polynomiale $f_{1}(x)=x^{2}+2x$, nommée \mtlb{f1}. Puis vérifier qu'elle fonctionne.
-
-    \item Dans le fichier \cmd{tp1\_fonction.sci} créer la procédure
-    \begin{center}
-      \mtlb{function PlotFunction(f,a,prec)}
-    \end{center}
-    qui trace la fonction \mtlb{f} sur l'intervalle \mtlb{[-a,a]} avec un pas de précision \mtlb{prec}. Tester cette procédure (dans \cmd{tp1\_exo1.sce}) avec la fonction $f_{1}$.
+    \item Créer dans ce même fichier la fonction polynomiale $f_{1}(x)=x^{2}+2x$, nommée \sclb{f1}. Puis vérifier qu'elle fonctionne.
 
     \item Dans le fichier \cmd{tp1\_fonction.sci} créer la procédure
     \begin{center}
-      \mtlb{function PlotInterpUnif(f,a,k,prec)}
+      \sclb{function PlotFunction(f,a,prec)}
     \end{center}
-    qui trace, avec un pas de précision \mtlb{prec}, le polynôme d'interpolation uniforme\footnote{c'est-à-dire, dont les points d'interpolations sont équidistants.} de degré au plus \mtlb{k} de \mtlb{f} sur l'intervalle \mtlb{[-a,a]}.
+    qui trace la fonction \sclb{f} sur l'intervalle \sclb{[-a,a]} avec un pas de précision \sclb{prec}. Tester cette procédure (dans \cmd{tp1\_exo1.sce}) avec la fonction $f_{1}$.
+
+    \item Dans le fichier \cmd{tp1\_fonction.sci} créer la procédure
+    \begin{center}
+      \sclb{function PlotInterpUnif(f,a,k,prec)}
+    \end{center}
+    qui trace, avec un pas de précision \sclb{prec}, le polynôme d'interpolation uniforme\footnote{c'est-à-dire, dont les points d'interpolations sont équidistants.} de degré au plus \sclb{k} de \sclb{f} sur l'intervalle \sclb{[-a,a]}.
 
     \item Sur la même figure tracer la fonctions $f_{1}$ sur $[-3,3]$ et ces polynômes d'interpolation uniforme $p_{k}$ de degré majoré par $k=0,..,10$. Que constatez-vous ?
 
-    \item Écrire un test qui imprime le degré du polynôme $p_{10}$. Pour déterminer le degré on peut ce servir des fonctions \mtlb{find}, \mtlb{max}, et pour l'impression de \mtlb{disp} et \mtlb{sprintf}.\newline
+    \item Écrire un test qui imprime le degré du polynôme $p_{10}$. Pour déterminer le degré on peut ce servir des fonctions \sclb{find}, \sclb{max}, et pour l'impression de \sclb{disp} et \sclb{sprintf}.\newline
     Le résultat est-il cohérent avec la théorie? Explication.
 
-    \item En utilisant la fonction \mtlb{norm} calculer et afficher les erreurs d'interpolation $\|f_{1}-p_{2}\|_{\infty}$ et $\|f_{1}-p_{10}\|_{\infty}$. Commenter.
+    \item En utilisant la fonction \sclb{norm} calculer et afficher les erreurs d'interpolation $\|f_{1}-p_{2}\|_{\infty}$ et $\|f_{1}-p_{10}\|_{\infty}$. Commenter.
 
   \end{enumerate}
 \end{exo}
@@ -73,12 +73,12 @@ L'année dernière, en L2, vous avez déjà travaillé sur ce problème en Scila
   \begin{enumerate}
     \item Dans le fichier \cmd{tp1\_fonction.sci} créer la procédure
     \begin{center}
-      \mtlb{function PlotErrInterpUnif(f,a,deg,prec)}
+      \sclb{function PlotErrInterpUnif(f,a,deg,prec)}
     \end{center}
-    qui, après avoir déterminé le polynôme d'interpolation uniforme $p_k$, calcule l'erreur d'interpolation $\| f - p_{k} \|_{\infty}$ sur \mtlb{[-a,a]} en utilisant la fonction \mtlb{norm} avec un pas de précision \mtlb{prec}, pour les degrés $k$ prescrits dans le vecteurs \mtlb{deg}. Puis tracer ces erreurs (en échelle $\log$) en fonctions du degré.\newline
-    Par exemple la commande \mtlb{PlotErrInterpUnif(f,3,[10:20],.1)} doit calculer et tracer les erreurs d'approximation (calculées avec un pas de précision \mtlb{.1}) de \mtlb{f} sur \mtlb{[-3,3]} pour les polynômes $p_{10},\ldots,p_{20}$.
+    qui, après avoir déterminé le polynôme d'interpolation uniforme $p_k$, calcule l'erreur d'interpolation $\| f - p_{k} \|_{\infty}$ sur \sclb{[-a,a]} en utilisant la fonction \sclb{norm} avec un pas de précision \sclb{prec}, pour les degrés $k$ prescrits dans le vecteurs \sclb{deg}. Puis tracer ces erreurs (en échelle $\log$) en fonctions du degré.\newline
+    Par exemple la commande \sclb{PlotErrInterpUnif(f,3,[10:20],.1)} doit calculer et tracer les erreurs d'approximation (calculées avec un pas de précision \sclb{.1}) de \sclb{f} sur \sclb{[-3,3]} pour les polynômes $p_{10},\ldots,p_{20}$.
 
-    \item Créer la fonction $f_{2}(x)=\sin(\pi x)$, appelé \mtlb{f2}, dans le fichier \cmd{tp1\_exo2.sce}. N'oublier pas d'initialiser ce fichier au début, comme vous l'avez fait pour \cmd{tp1\_exo1.sce}.
+    \item Créer la fonction $f_{2}(x)=\sin(\pi x)$, appelé \sclb{f2}, dans le fichier \cmd{tp1\_exo2.sce}. N'oublier pas d'initialiser ce fichier au début, comme vous l'avez fait pour \cmd{tp1\_exo1.sce}.
 
     \item Tracer cette fonction sur $[-2,2]$ ainsi que ses polynômes interpolations pour les degrés $k=20,\ldots,30$ sur le même graphique.
 
@@ -102,13 +102,13 @@ L'année dernière, en L2, vous avez déjà travaillé sur ce problème en Scila
 
     \item Dans le fichier \cmd{tp1\_fonction.sci} créer la procédure
     \begin{center}
-      \mtlb{function [v]=tcheb(a,b,n)}
+      \sclb{function [v]=tcheb(a,b,n)}
     \end{center}
-    qui renvoie les \mtlb{n} abscisses de Tchebychev dans \mtlb{[a,b]}.
+    qui renvoie les \sclb{n} abscisses de Tchebychev dans \sclb{[a,b]}.
 
     \item Modifier (copier/coller + renommer + modifier) les fonctions\\
-    \mtlb{PlotInterpUnif} $\longrightarrow$ \mtlb{PlotInterpTcheb}\\
-    \mtlb{PlotErrInterpUnif} $\longrightarrow$ \mtlb{PlotErrInterpTcheb}\\
+    \sclb{PlotInterpUnif} $\longrightarrow$ \sclb{PlotInterpTcheb}\\
+    \sclb{PlotErrInterpUnif} $\longrightarrow$ \sclb{PlotErrInterpTcheb}\\
     de sorte que l'interpolation se fasse au niveau des abscisses de Tchebychev.
 
     \item Étudier comme dans l'exercice précédent la convergence des interpolations de Tchebychev pour la fonction $f_{3}$. Que constatez-vous ?

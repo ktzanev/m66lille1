@@ -210,28 +210,28 @@ ymax/.store in=\ymax, ymax/.default=3, ymax=3,
 % ===================== pour les TPs =====================
 
 \usepackage{listings}
-% -------------- matlab
+% -------------- scilab
 % --- colors using 'colors' package
-\definecolor{mtlbcmd}{rgb}{1,0,0}
-\definecolor{mtlbtext}{rgb}{0,0,1}
+\definecolor{sclbcmd}{rgb}{1,0,0}
+\definecolor{sclbtext}{rgb}{0,0,1}
 \definecolor{cmdtext}{rgb}{0,0,.5}
 \definecolor{notion}{rgb}{1,0,0}
 \definecolor{attention}{rgb}{1,0,0}
-% --- matlab commands using 'listings' and 'tikz' packages
+% --- scilab commands using 'listings' and 'tikz' packages
 \lstset{
     language=scilab,
-    basicstyle=\color{mtlbtext}\ttfamily,
-    keywordstyle=\color{mtlbcmd}\bfseries,
-    morekeywords={clc, ones, repmat, numel, switch, inline, @, data_bounds, gca}
+    basicstyle=\color{sclbtext}\ttfamily,
+    keywordstyle=\color{sclbcmd}\bfseries,
+    morekeywords={clc, repmat, gca, data_bounds}
 }
-% -- la commande mtlb sans bordure
-\newcommand{\mtlb}[1]{\nofrench@punctuation\lstinline!#1!\french@punctuation}
-% -- la commande mtlbbox comme mtlb mais avec une boite
-\newcommand{\mtlbbox}[1]{\tikz[anchor=base, baseline]{\node[draw=mtlbtext,rounded corners=2.1pt,fill=mtlbtext!3,minimum width=7mm]{\vphantom{H}{\nofrench@punctuation\lstinline!#1!\french@punctuation}\vphantom{p}};}}
-% -- l'environement matlab, peut être utiliser dans minipage
-\lstnewenvironment{matlab}
+% -- la commande sclb sans bordure
+\newcommand{\sclb}[1]{\nofrench@punctuation\lstinline!#1!\french@punctuation}
+% -- la commande sclbbox comme sclb mais avec une boite
+\newcommand{\sclbbox}[1]{\tikz[anchor=base, baseline]{\node[draw=sclbtext,rounded corners=2.1pt,fill=sclbtext!3,minimum width=7mm]{\vphantom{H}{\nofrench@punctuation\lstinline!#1!\french@punctuation}\vphantom{p}};}}
+% -- l'environement scilab, peut être utiliser dans minipage
+\lstnewenvironment{scilab}
     {\lstset{
-                basicstyle=\color{mtlbtext}\ttfamily\small,
+                basicstyle=\color{sclbtext}\ttfamily\small,
                 frame=single,
                 frameround=tttt,
                 framesep=7pt,

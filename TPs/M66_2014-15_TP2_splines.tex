@@ -8,7 +8,7 @@
 \hautdepage{TP2: Interpolation par morceaux et splines}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Vous êtes invité à créer le fichier \cmd{tp2\_fonction.sci} qui sera complété au fur et à mesure avec les nouvelles procédures. Pour chaque exercice, il va falloir créer un fichier, \cmd{tp2\_exo0.sce}, \dots ,\cmd{tp2\_exo3.sce}, comportant les lignes de code correspondant à la résolution de l'exercice et incluant au début le fichier \cmd{tp2\_fonction.sci} et les autres initialisations habituelles (\mtlb{clear},\mtlb{clc},\dots).\\[1ex]
+Vous êtes invité à créer le fichier \cmd{tp2\_fonction.sci} qui sera complété au fur et à mesure avec les nouvelles procédures. Pour chaque exercice, il va falloir créer un fichier, \cmd{tp2\_exo0.sce}, \dots ,\cmd{tp2\_exo3.sce}, comportant les lignes de code correspondant à la résolution de l'exercice et incluant au début le fichier \cmd{tp2\_fonction.sci} et les autres initialisations habituelles (\sclb{clear},\sclb{clc},\dots).\\[1ex]
 
 \attention{center}{En cas de blocage, commencez toujours par regarder l'aide ou sur Google !!}
 
@@ -38,26 +38,26 @@ On se propose ici de procéder à l'interpolation d'une fonction $f$ définie su
   \includegraphics[width=15cm]{IndexInterval}
 \end{center}
 
-  Pour cela, créez dans le fichier \cmd{tp2\_fonction.sci} une fonction \mtlb{[k]=IndexInterval(a,b,n,x)}. Cette fonction doit satisfaire les conditions suivantes:
+  Pour cela, créez dans le fichier \cmd{tp2\_fonction.sci} une fonction \sclb{[k]=IndexInterval(a,b,n,x)}. Cette fonction doit satisfaire les conditions suivantes:
   \begin{itemize}
-    \item Étant donnés les bornes \mtlb{a} et \mtlb{b}, le nombre de sous intervalles \mtlb{n} et un vecteur \mtlb{x}, elle doit retourner un vecteur \mtlb{k}, de la même taille que \mtlb{x}, qui contient les indices des intervalles contenant les coordonnées de \mtlb{x}.
+    \item Étant donnés les bornes \sclb{a} et \sclb{b}, le nombre de sous intervalles \sclb{n} et un vecteur \sclb{x}, elle doit retourner un vecteur \sclb{k}, de la même taille que \sclb{x}, qui contient les indices des intervalles contenant les coordonnées de \sclb{x}.
 
-    \item Pour des raisons techniques, on demande en plus que si une coordonnée de \mtlb{x} est inférieure à \mtlb{a}, la valeur correspondante rendue doit être \mtlb{1}, et si elle est supérieure à \mtlb{b}, elle doit être \mtlb{n}.
+    \item Pour des raisons techniques, on demande en plus que si une coordonnée de \sclb{x} est inférieure à \sclb{a}, la valeur correspondante rendue doit être \sclb{1}, et si elle est supérieure à \sclb{b}, elle doit être \sclb{n}.
   \end{itemize}
 
   \textit{Indications:}
   \begin{enumerate}
     \item Avant de débuter la création de la fonction, testez et commentez le code suivant
-    \begin{matlab}
+    \begin{scilab}
       test = [-1.3 -0.5 0.7 1.3 2 3.7];
       disp(ceil(test));
       disp(max(test,1));
       disp(min(test,2));
-    \end{matlab}
+    \end{scilab}
 
-    \item Créez d'abord la fonction pour qu'elle fonctionne avec une valeur unique \mtlb{x}. Puis testez-la par exemple avec avec \mtlb{IndexInterval(0,1,3,.5)} (le résultat doit être \mtlb{2}).
+    \item Créez d'abord la fonction pour qu'elle fonctionne avec une valeur unique \sclb{x}. Puis testez-la par exemple avec avec \sclb{IndexInterval(0,1,3,.5)} (le résultat doit être \sclb{2}).
 
-    \item Une fois la fonction faite pour fonctionner avec un vecteur \mtlb{x}, vérifiez que l'instruction \mtlb{IndexInterval(0,1,3,[-1,0,.5,1,2])} renvoie \mtlb{1.    1.    2.    3.    3.}.
+    \item Une fois la fonction faite pour fonctionner avec un vecteur \sclb{x}, vérifiez que l'instruction \sclb{IndexInterval(0,1,3,[-1,0,.5,1,2])} renvoie \sclb{1.    1.    2.    3.    3.}.
   \end{enumerate}
 
 \end{exo}
@@ -72,8 +72,8 @@ On se propose ici de procéder à l'interpolation d'une fonction $f$ définie su
     \begin{center}
       \includegraphics[width=10cm]{ConstParMorceaux}
     \end{center}
-    Créez la fonction \mtlb{[y] = ConstPiecewise(a,b,v,x)} qui, étant données les bornes \mtlb{a}, \mtlb{b} et les valeurs des hauteurs des paliers \mtlb{v}, renvoie les valeurs \mtlb{y} de la fonction constante par morceaux aux points \mtlb{x}.\\
-    Puis pour tester son fonctionnement, dessinez (en utilisant $1000$ points) la fonction constante par morceaux sur $[-\frac12, \frac32]$ qui a pour hauteur des paliers $v=(0,2,-1,1)$. Profitez de l'occasion pour rajouter, en plus de la légende, une grille \mtlb{xgrid(5, 1, 7)} visible sur la boîte de coordonnées \mtlb{axes.data_bounds = [-1,2,-2,3]}, où \mtlb{axes=gca()}. Le résultat devrait ressembler à ça :
+    Créez la fonction \sclb{[y] = ConstPiecewise(a,b,v,x)} qui, étant données les bornes \sclb{a}, \sclb{b} et les valeurs des hauteurs des paliers \sclb{v}, renvoie les valeurs \sclb{y} de la fonction constante par morceaux aux points \sclb{x}.\\
+    Puis pour tester son fonctionnement, dessinez (en utilisant $1000$ points) la fonction constante par morceaux sur $[-\frac12, \frac32]$ qui a pour hauteur des paliers $v=(0,2,-1,1)$. Profitez de l'occasion pour rajouter, en plus de la légende, une grille \sclb{xgrid(5, 1, 7)} visible sur la boîte de coordonnées \sclb{axes.data_bounds = [-1,2,-2,3]}, où \sclb{axes=gca()}. Le résultat devrait ressembler à ça :
     \begin{center}
       \includegraphics[width=11cm]{SciLab_test_constante}
     \end{center}
@@ -84,9 +84,9 @@ On se propose ici de procéder à l'interpolation d'une fonction $f$ définie su
       \]
     où $M_1$ est un majorant de $f'$ sur $I$.
     \begin{enumerate}
-      \item Pour cela, créez une fonction \mtlb{[v,t] = InterpConst(a,b,n,f)} qui étant donnée une fonction \mtlb{f} renvoie dans \mtlb{t} les valeurs des $x_{i-\frac12}$ pour $i=1,\ldots,n$, et en \mtlb{v} les valeurs de $f$ en ces points.
+      \item Pour cela, créez une fonction \sclb{[v,t] = InterpConst(a,b,n,f)} qui étant donnée une fonction \sclb{f} renvoie dans \sclb{t} les valeurs des $x_{i-\frac12}$ pour $i=1,\ldots,n$, et en \sclb{v} les valeurs de $f$ en ces points.
 
-      \item Soit $f=\sin(x)$ sur $[-5,5]$. En utilisant les fonctions précédemment définies, \mtlb{InterpConst} et \mtlb{ConstPiecewise}, dessinez (en utilisant 1000 points) sur un même graphique:
+      \item Soit $f=\sin(x)$ sur $[-5,5]$. En utilisant les fonctions précédemment définies, \sclb{InterpConst} et \sclb{ConstPiecewise}, dessinez (en utilisant 1000 points) sur un même graphique:
       \begin{itemize}
         \item la fonction $f$,
         \item la fonction d'interpolation constante par morceaux $s_{0}$,
@@ -97,7 +97,7 @@ On se propose ici de procéder à l'interpolation d'une fonction $f$ définie su
         \includegraphics[width=11cm]{SciLab_test_interp_constante}
       \end{center}
 
-      \item Pour \mtlb{n=2,4,...,2^10} calculez l'erreur d'interpolation (en norme infinie). Puis sur un même graphique représentez (en échelle logarithmique) cette erreur et la majoration théorique de l'erreur.
+      \item Pour \sclb{n=2,4,...,2^10} calculez l'erreur d'interpolation (en norme infinie). Puis sur un même graphique représentez (en échelle logarithmique) cette erreur et la majoration théorique de l'erreur.
     \end{enumerate}
   \end{enumerate}
 \end{exo}
@@ -112,7 +112,7 @@ On se propose ici de procéder à l'interpolation d'une fonction $f$ définie su
     \begin{center}
       \includegraphics[width=11cm]{AffineParMorceaux.pdf}
     \end{center}
-    Créez la fonction \mtlb{[y] = AffinePiecewise(a,b,v,x)} qui, étant données les bornes \mtlb{a}, \mtlb{b} et les valeurs aux nœuds \mtlb{v}, renvoie les valeurs \mtlb{y} de la fonction affine par morceaux aux points \mtlb{x}.\\
+    Créez la fonction \sclb{[y] = AffinePiecewise(a,b,v,x)} qui, étant données les bornes \sclb{a}, \sclb{b} et les valeurs aux nœuds \sclb{v}, renvoie les valeurs \sclb{y} de la fonction affine par morceaux aux points \sclb{x}.\\
     Puis pour tester son fonctionnement, dessinez (en utilisant $1000$ points) la fonction affine par morceaux sur $[-\frac12, \frac32]$ qui a pour valeurs aux nœuds $v=(0,2,-1,1,0)$. Le résultat devrait ressembler à ça :
     \begin{center}
       \includegraphics[width=11cm]{SciLab_test_affine}
@@ -129,9 +129,9 @@ On se propose ici de procéder à l'interpolation d'une fonction $f$ définie su
       où $M_2$ est un majorant de $f''$ sur $I$.\\
       On va suivre le même schéma que dans l'exercice précédent.
       \begin{enumerate}
-      \item Créez une fonction \mtlb{[v,t] = InterpAffine(a,b,n,f)} qui étant donnée une fonction \mtlb{f} renvoie dans \mtlb{t} les valeur des $x_{i}$ pour $i=0,\ldots,n$, et en \mtlb{v} les valeurs de $f$ en ces points.
+      \item Créez une fonction \sclb{[v,t] = InterpAffine(a,b,n,f)} qui étant donnée une fonction \sclb{f} renvoie dans \sclb{t} les valeur des $x_{i}$ pour $i=0,\ldots,n$, et en \sclb{v} les valeurs de $f$ en ces points.
 
-      \item Soit $f=\sin(x)$ sur $[-5,5]$. En utilisant les fonctions précédemment définies, \mtlb{InterpAffine} et \mtlb{AffinePiecewise}, dessinez (en utilisant 1000 points) sur un même graphique:
+      \item Soit $f=\sin(x)$ sur $[-5,5]$. En utilisant les fonctions précédemment définies, \sclb{InterpAffine} et \sclb{AffinePiecewise}, dessinez (en utilisant 1000 points) sur un même graphique:
       \begin{itemize}
         \item la fonction $f$,
         \item la fonction d'interpolation affine par morceaux $s_{1}$ sur $10$ intervalles,
@@ -142,7 +142,7 @@ On se propose ici de procéder à l'interpolation d'une fonction $f$ définie su
         \includegraphics[width=11cm]{SciLab_test_interp_affine}
       \end{center}
 
-      \item Pour \mtlb{n=2,4,...,2^10} calculez l'erreur d'interpolation (en norme infinie). Puis sur un même graphique, représentez (en échelle logarithmique) cette erreur et la majoration théorique de l'erreur.
+      \item Pour \sclb{n=2,4,...,2^10} calculez l'erreur d'interpolation (en norme infinie). Puis sur un même graphique, représentez (en échelle logarithmique) cette erreur et la majoration théorique de l'erreur.
     \end{enumerate}
   \end{enumerate}
 \end{exo}
@@ -154,50 +154,50 @@ On se propose ici de procéder à l'interpolation d'une fonction $f$ définie su
   Dans cet exercice, on va approcher une fonction $f$ par une spline cubique (fonction $C^{2}$ polynomiale de degré $3$ par morceaux).
   \begin{enumerate}
     \item Dans cette question on va déterminer les coefficients d'un polynôme cubique à partir des données d'interpolation d'Hermite. Pour commencer, écrire une procédure\\
-    \indent \mtlb{[p] = CubicCoeffs(x1,x2,y1,y2,d1,d2)}\\
-    qui détermine les coefficients \mtlb{p} du polynôme $P(x)= p_{1}+p_{2}x+p_{3}x^{2}+p_{4}x^{3}$ qui a pour valeurs \mtlb{y1} en \mtlb{x1} et \mtlb{y2} en \mtlb{x2}, et dont les dérivées dans ces deux points sont respectivement \mtlb{d1} et \mtlb{d2}. Pour vérifier que votre procédure fonctionne, testez-la avec \mtlb{CubicCoeffs(0,1,2,3,4,5)} et le résultat devrait être \mtlb{2. 4. - 10. 7.} (éventuellement en colonne).
+    \indent \sclb{[p] = CubicCoeffs(x1,x2,y1,y2,d1,d2)}\\
+    qui détermine les coefficients \sclb{p} du polynôme $P(x)= p_{1}+p_{2}x+p_{3}x^{2}+p_{4}x^{3}$ qui a pour valeurs \sclb{y1} en \sclb{x1} et \sclb{y2} en \sclb{x2}, et dont les dérivées dans ces deux points sont respectivement \sclb{d1} et \sclb{d2}. Pour vérifier que votre procédure fonctionne, testez-la avec \sclb{CubicCoeffs(0,1,2,3,4,5)} et le résultat devrait être \sclb{2. 4. - 10. 7.} (éventuellement en colonne).
     \begin{center}
       \includegraphics[width=9cm]{CubbicCoeffs}
     \end{center}
 
-    \item Écrire la procédure \mtlb{[y] = CubicEval(p,x)} qui, étant donnés les coefficients \mtlb{p} d'un polynôme et un vecteur \mtlb{x}, évalue ce polynôme en les coordonnées de \mtlb{x}. Pour vérifier que votre procédure fonctionne, testez-la avec \mtlb{CubicEval([1:4],[-1:1])} et le résultat devrait être \mtlb{- 2.    1.    10.}.
+    \item Écrire la procédure \sclb{[y] = CubicEval(p,x)} qui, étant donnés les coefficients \sclb{p} d'un polynôme et un vecteur \sclb{x}, évalue ce polynôme en les coordonnées de \sclb{x}. Pour vérifier que votre procédure fonctionne, testez-la avec \sclb{CubicEval([1:4],[-1:1])} et le résultat devrait être \sclb{- 2.    1.    10.}.
 
-    \item En utilisant les procédures \mtlb{CubicCoeffs} et \mtlb{CubicEval}, dessinez la base d'Hermite sur $[0,1]$, c'est-à-dire les $4$ polynômes qui ont une seule des valeurs $P(0)$, $P(1)$, $P'(0)$, $P'(1)$ non nulle, égale à $1$.
+    \item En utilisant les procédures \sclb{CubicCoeffs} et \sclb{CubicEval}, dessinez la base d'Hermite sur $[0,1]$, c'est-à-dire les $4$ polynômes qui ont une seule des valeurs $P(0)$, $P(1)$, $P'(0)$, $P'(1)$ non nulle, égale à $1$.
 
-    \item En utilisant les procédure \mtlb{CubicCoeffs} et \mtlb{CubicEval}, dessinez les polynômes $P$ sur $[0,1]$ tels que $P(0)=0$, $P(1)=1$, $P'(1)=-7$ et $P'(0)$ prend les valeurs entières de $-10$ à $10$.
+    \item En utilisant les procédure \sclb{CubicCoeffs} et \sclb{CubicEval}, dessinez les polynômes $P$ sur $[0,1]$ tels que $P(0)=0$, $P(1)=1$, $P'(1)=-7$ et $P'(0)$ prend les valeurs entières de $-10$ à $10$.
 
-    \item Il est temps maintenant de créer la procédure qui évalue la spline cubique d'interpolation. Pour cela créez la procédure \mtlb{[y] = CubicSplin(a,b,v,x)} qui a pour entrées:
+    \item Il est temps maintenant de créer la procédure qui évalue la spline cubique d'interpolation. Pour cela créez la procédure \sclb{[y] = CubicSplin(a,b,v,x)} qui a pour entrées:
     \begin{itemize}
-      \item Les bornes \mtlb{a} et \mtlb{b} de l'intervalle d'interpolation.
+      \item Les bornes \sclb{a} et \sclb{b} de l'intervalle d'interpolation.
 
-      \item Les valeurs \mtlb{v=[v(1), v(2), ..., v(n+1)]} d'interpolation aux  $n+1$ nœuds équi-distribués.
+      \item Les valeurs \sclb{v=[v(1), v(2), ..., v(n+1)]} d'interpolation aux  $n+1$ nœuds équi-distribués.
 
-      \item Les points \mtlb{x} dans lesquels il faut faire l'évaluation.
+      \item Les points \sclb{x} dans lesquels il faut faire l'évaluation.
     \end{itemize}
-    Cette procédure doit renvoyer les valeurs \mtlb{y} de la spline naturelle aux points \mtlb{x}.
+    Cette procédure doit renvoyer les valeurs \sclb{y} de la spline naturelle aux points \sclb{x}.
 
     \begin{center}
       \includegraphics[width=15cm]{CubbicSpline}
     \end{center}
 
-    La procédure \mtlb{CubicSplin} devra faire dans l'ordre:
+    La procédure \sclb{CubicSplin} devra faire dans l'ordre:
     \begin{itemize}
-       \item Créez le vecteur \mtlb{t} des $n+1$ nœuds équi-distribués d'interpolation.
-       \item En utilisant \mtlb{d = splin(t,v,"natural")}, déterminez les valeurs des dérivées aux nœuds d'interpolation.
-       \item En utilisant \mtlb{IndexInterval} de l'exercice \textbf{1}, déterminez les intervalles dans lesquels se trouvent les points \mtlb{x}.
-       \item En utilisant \mtlb{CubicCoeffs} et \mtlb{CubicEval}, déterminez les valeurs des \mtlb{y} à partir des informations précédemment obtenues.
+       \item Créez le vecteur \sclb{t} des $n+1$ nœuds équi-distribués d'interpolation.
+       \item En utilisant \sclb{d = splin(t,v,"natural")}, déterminez les valeurs des dérivées aux nœuds d'interpolation.
+       \item En utilisant \sclb{IndexInterval} de l'exercice \textbf{1}, déterminez les intervalles dans lesquels se trouvent les points \sclb{x}.
+       \item En utilisant \sclb{CubicCoeffs} et \sclb{CubicEval}, déterminez les valeurs des \sclb{y} à partir des informations précédemment obtenues.
      \end{itemize}
      Pour vérifier que votre procédure fonctionne, testez-la avec\\
-     \indent \mtlb{CubicSplin(0,1,[0,2,1],[0:.2:1])}\\
+     \indent \sclb{CubicSplin(0,1,[0,2,1],[0:.2:1])}\\
      et le résultat devrait être\\
-     \indent \mtlb{0.    1.052    1.816    2.016    1.652    1.}
+     \indent \sclb{0.    1.052    1.816    2.016    1.652    1.}
 
-     \item Reprendre la question 2.(b) de l'exercice \textbf{2}, pour représenter la fonction $\sin(x)$ sur $[-5,5]$, ainsi que la spline cubique naturelle qui l'interpole sur $10$ intervalles de longueur constante. Pour cela normalement il suffit de remplacer la fonction \mtlb{AffinePiecewise} par \mtlb{CubicSplin}.
+     \item Reprendre la question 2.(b) de l'exercice \textbf{2}, pour représenter la fonction $\sin(x)$ sur $[-5,5]$, ainsi que la spline cubique naturelle qui l'interpole sur $10$ intervalles de longueur constante. Pour cela normalement il suffit de remplacer la fonction \sclb{AffinePiecewise} par \sclb{CubicSplin}.
 
-     \item Modifiez la fonction \mtlb{CubicSplin} (ou créez une nouvelle fonction \mtlb{CubicSplinClamped}) qui permet à la place de \mtlb{splin(t,v,"natural")} d'évoquer \mtlb{d = splin(t,v,"clamped",bd)} pour obtenir une interpolation par spline tendue avec des dérivées aux bords \mtlb{bd(1)} en \mtlb{a}, et \mtlb{bd(2)} en \mtlb{b}.\\
+     \item Modifiez la fonction \sclb{CubicSplin} (ou créez une nouvelle fonction \sclb{CubicSplinClamped}) qui permet à la place de \sclb{splin(t,v,"natural")} d'évoquer \sclb{d = splin(t,v,"clamped",bd)} pour obtenir une interpolation par spline tendue avec des dérivées aux bords \sclb{bd(1)} en \sclb{a}, et \sclb{bd(2)} en \sclb{b}.\\
      Puis rajouter le graphe du spline cubique tendu d'interpolation de $\sin(x)$ sur le graphique de la question précédente.
 
-     \item Pour \mtlb{n=2,4,...,2^10} calculez l'erreur d'interpolation par splines cubiques naturelles et tendues (en norme infinie). Puis représentez-les sur un même graphique (en échelle logarithmique).
+     \item Pour \sclb{n=2,4,...,2^10} calculez l'erreur d'interpolation par splines cubiques naturelles et tendues (en norme infinie). Puis représentez-les sur un même graphique (en échelle logarithmique).
 
      \item Dessinez la base cardinale des splines cubiques sur les nœuds $\{0,1,2,3\}$.
 
