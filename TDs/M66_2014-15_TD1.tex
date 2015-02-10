@@ -260,7 +260,7 @@ Soient $x_0,x_1,\ldots,x_n$ des points distincts d'un intervalle $I$, et $f$,$g$
 
   Soit $a=x_{0}<x_{2}<\cdots<x_{n}=b$ les $n+1$ nœuds des splines cubiques $\mathcal{S}_{3}$.
 
-  Pour $i=0,\ldots,n$ on note par $\varphi_{i}$ la spline naturelle telle que $\varphi_{i}(x_{j})=\delta_{ij}$. Ainsi que les deux splines tendues $\varphi_{k}$ pour $k \in \{n+1,n+2\}$ définies par $\varphi_{k}(x_{i})=0$ pour $\forall i=0,\ldots,n$, $\varphi_{n+1}'(x_{0})=1$, $\varphi_{n+1}'(x_{n})=0$, $\varphi_{n+2}'(x_{0})=0$ et $\varphi_{n+2}'(x_{n})=1$.
+  Pour $i=0,\ldots,n$ on note par $\varphi_{i}$ la spline tendues telle que $\varphi_{i}(x_{j})=\delta_{ij}$ et $\varphi'_{i}(x_{0})=\varphi'_{i}(x_{n})=0$. Ainsi que les deux splines tendues $\varphi_{k}$ pour $k \in \{n+1,n+2\}$ définies par $\varphi_{k}(x_{i})=0$ pour $\forall i=0,\ldots,n$, $\varphi_{n+1}'(x_{0})=1$, $\varphi_{n+1}'(x_{n})=0$, $\varphi_{n+2}'(x_{0})=0$ et $\varphi_{n+2}'(x_{n})=1$.
   \begin{enumerate}
     \item Montrer que les $\{\varphi_{k}\}_{k=0,\ldots,n+2}$ forment une base de $\mathcal{S}_{3}$.\newline
     Cette base est appeler \emph{base cardinale}.
@@ -278,7 +278,7 @@ Soient $x_0,x_1,\ldots,x_n$ des points distincts d'un intervalle $I$, et $f$,$g$
         B_{i,0}(x) & =
           \Bigg\{
           \begin{array}{rl}
-            1 & \text{ si } x \in [x_{i},x_{i+1}]\\
+            1 & \text{ si } x \in [x_{i},x_{i+1}[\\
             0 & \text{ sinon }
           \end{array}               & \text{ pour } i=0,\ldots,n-1\\[3ex]
         B_{i,k}(x) & = \frac{x-x_{i}}{x_{i+k}-x_{i}}B_{i,k-1}(x)
