@@ -1,0 +1,120 @@
+\documentclass[a4paper,12pt,reqno]{amsart}
+\usepackage{macros_M66}
+
+\begin{document}
+\hautdepage{TD2: Courbes de Bézier}
+
+
+%-------------------------------------
+\begin{exo}\label{exo:base} (Propriétés de base)
+
+  Les polynômes de Bernstein d'ordre $n$ sont les polynômes
+  $$
+    B_{i}^{n}(t) =\binom{n}{i}t^{i}(1-t)^{n-i} \text{ pour } i=0,\ldots,n
+  $$
+  Lorsque $n$ est fixé, on notera simplement $B_{i}$ au lieu de $B_{i}^{n}$.
+
+  On considère $n + 1$ points $A_{0},\ldots,A_{n}$, d'un espace affine $V$, $n \geq 1$ (le plus souvent $n = 3$ et $V=\mathbb{R}^{2}$).
+  On définit la courbe paramétrée \emph{de Bézier} $M:[0,1] \rightarrow V$, associée à ces points \emph{de contrôle}:
+  $$
+    M(t) = B_{0}(t) A_{0} + B_{1}(t) A_{1} + \cdots + B_{n}(t) A_{n}
+      \text{\quad pour\quad} t \in [0,1].
+  $$
+  \begin{enumerate}
+    \item Montrer que la courbe $M([0,1])$ est dans l'enveloppe convexe des points de contrôle $A_{0},\ldots,A_{n}$.
+
+    \item Montrer que $M(0)=A_{0}$ et $M(1)=A_{1}$.
+
+    \item\label{exo:base:bords} Montrer qu'il existe une constante $\lambda$, à déterminer, telle que $M'(0)=\lambda\overrightarrow{A_{0}A_{1}}$ et $M'(1)=\lambda\overrightarrow{A_{n-1}A_{n}}$.
+
+    \item\label{exo:base:allignes} Montrer que si les $A_{i}$ sont tous alignées et équidistants, alors $M(t) = (1-t) A_{0} + t A_{n}$.
+
+    \item\label{exo:base:B} Soit $B:V^{n} \longrightarrow V^{[0,1]}$, l'application qui associe aux $n+1$ points de $V$ la courbe de Bézier d'ordre $n$, ayant ces points comme points de contrôle.
+    Montrer que $B$ est une application affine, et que si $V$ est un espace vectoriel, alors $B$ est linéaire.
+
+    \item On note $B_{[A_{0},\ldots,A_{n}]}$ la courbe de Bézier dont les points de contrôle sont $A_{0},\ldots,A_{n}$. Soit $T:V \rightarrow W$ une application affine. Montrer que $T(B_{[A_{0},\ldots,A_{n}]}(t)) = B_{[T(A_{0}),\ldots,T(A_{n})]}(t)$ pour tout $t \in \mathbb{R}$.
+  \end{enumerate}
+\end{exo}
+
+
+%-----------------------------------
+\begin{exo}\label{exo:elev} (Élévation de degré)
+
+   Soit $A_{0}=(0,1)$ , $A_{1}=(1,1)$, $A_{2}=(1,0)$.
+   \begin{enumerate}
+     \item Calculer la courbe de Bézier ayant $A_{0}$,$ A_{1}$ et $A_{2}$ pour points de contrôle. Dessiner là.
+
+     \item Montrer qu'il existe des points $B_{0}$, $B_{1}$, $B_{2}$ et $B_{3}$ tels que la courbe de Bézier associée soit la même que pour les points $A_{0}$,$ A_{1}$ et $A_{2}$.
+
+     \item\label{exo:elev:gen} Comment peut-on généraliser la question précédente pour $n$ points $A_{0},\ldots,A_{n}$ quelconques?
+     \textit{Indication :} $B_{i} = \frac{i}{n+1}A_{i-1}+\frac{n+1-i}{n+1}A_{i}$ pour $i=1,...,n$.
+   \end{enumerate}
+
+\end{exo}
+
+%-------------------------------------
+\begin{exo} (Construction itérative)
+
+  On note par $B_{[A_{0},\ldots,A_{n}]}$ la courbe de Bézier dont les points de contrôle sont $A_{0},\ldots,A_{n}$.
+  \begin{enumerate}
+    \item Montrer que
+    $$
+      B_{[A_{0},\ldots,A_{n}]}(t) = (1-t)B_{[A_{0},\ldots,A_{n-1}]}(t) +tB_{[A_{1},\ldots,A_{n}]}(t).
+    $$
+
+    \item En déduire de la question précédente la question (\ref{exo:base:allignes}) de l'exercice \ref{exo:base}.
+
+    \item Soit $B'_{[A_{0},\ldots,A_{n}]}$ la courbe dérivée de $B_{[A_{0},\ldots,A_{n}]}$. Montre (par récurrence) que
+    $$
+      B'_{[A_{0},\ldots,A_{n}]} = n\left(B_{[A_{1},\ldots,A_{n}]} - B_{[A_{0},\ldots,A_{n-1}]}\right)
+    $$
+
+    \item On note $\Delta_{i} := \overrightarrow{A_{i}A_{i+1}}$ pour $i=0,\ldots,n-1$. En déduire que
+    $$
+      B'_{[A_{0},\ldots,A_{n}]} = nB_{[\Delta_{0},\ldots,\Delta_{n-1}]}.
+    $$
+
+    \item En déduire de la question précédente la question (\ref{exo:base:bords}) de l'exercice \ref{exo:base}.
+  \end{enumerate}
+\end{exo}
+
+%-------------------------------------
+\begin{exo} (Courbes polynomiales)
+
+    Soit $V$ un espace affine de dimension $n$ (on peut dans un premier temps prendre $n=2$ et $V=\mathbb{R}^{2}$). On dit que $M:\mathbb{R} \rightarrow V$ est une courbe polynomiale de degré $d$ si dans un repère $M(t) = (P_{1}(t),\ldots,P_{n}(t))$ avec $P_{i} \in \mathbb{R}_{d}[X]$ pour $i=1,\ldots,n$.
+
+  \begin{enumerate}
+
+    \item Montrer que la définition de courbe polynomiale de degré $d$ ne dépend pas du repère choisie.
+
+    \item Montrer que toute courbe polynomiale $M(t)$ de degré $d$ peut s'écrire de façon unique comme courbe de Bézier d'ordre $d$.
+
+    \item En déduire que toute spline de degré $k$ avec $n+1$ nœuds peut être réalisé comme la jonction de $n$ courbe de Bézier d'ordre $k$.
+
+    \item Redémontrer la question (\ref{exo:elev:gen}) de l'exercice \ref{exo:elev}.
+
+  \end{enumerate}
+\end{exo}
+
+%-------------------------------------
+\begin{exo} (Jonction de courbes de Bézier)
+
+  Soit $A_{0}$, $A_{1}$,\dots, $A_{n}$ et $B_{0}$, $B_{1}$,\dots, $B_{n}$ deux ensembles de points de contrôle pour deux courbes de Bézier $M(t)$ et $N(t)$, $t \in [0,1]$. On considère la courbe paramétré
+  $$
+    S(t) =
+      \begin{cases}
+        M(2t) & \text{ si } t \in [0,\frac12[ \\
+        M(2t-1) & \text{ si } t \in [\frac12,1] \\
+      \end{cases}
+  $$
+  \begin{enumerate}
+    \item Sous quelle condition sur les points de contrôle la courbe $S$ est continue ?
+
+    \item Sous quelle condition sur les points de contrôle la courbe $S$ est $C^{1}$ ?
+
+    \item Sous quelle condition sur les points de contrôle la courbe $S$ est $C^{k}$ ?
+  \end{enumerate}
+
+\end{exo}
+
+\end{document}
