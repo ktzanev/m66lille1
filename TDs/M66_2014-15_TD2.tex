@@ -46,7 +46,7 @@
 
      \item Montrer qu'il existe des points $B_{0}$, $B_{1}$, $B_{2}$ et $B_{3}$ tels que la courbe de Bézier associée soit la même que pour les points $A_{0}$,$ A_{1}$ et $A_{2}$.
 
-     \item\label{exo:elev:gen} Comment peut-on généraliser la question précédente pour $n$ points $A_{0},\ldots,A_{n}$ quelconques?
+     \item\label{exo:elev:gen} Comment peut-on généraliser la question précédente pour $n+1$ points $A_{0},\ldots,A_{n}$ quelconques?
      \textit{Indication :} $B_{i} = \frac{i}{n+1}A_{i-1}+\frac{n+1-i}{n+1}A_{i}$ pour $i=1,...,n$.
    \end{enumerate}
 
@@ -81,15 +81,15 @@
 %-------------------------------------
 \begin{exo} (Courbes polynomiales)
 
-    Soit $V$ un espace affine de dimension $n$ (on peut dans un premier temps prendre $n=2$ et $V=\mathbb{R}^{2}$). On dit que $M:\mathbb{R} \rightarrow V$ est une courbe polynomiale de degré $d$ si dans un repère $M(t) = (P_{1}(t),\ldots,P_{n}(t))$ avec $P_{i} \in \mathbb{R}_{d}[X]$ pour $i=1,\ldots,n$.
+    Soit $V$ un espace affine de dimension $n$ (on peut dans un premier temps prendre $n=2$ et $V=\mathbb{R}^{2}$). On dit que $M:\mathbb{R} \rightarrow V$ est une courbe polynomiale de degré $k$ si dans un repère on a $M(t) = (P_{1}(t),\ldots,P_{n}(t))$ avec $P_{i} \in \mathbb{R}_{k}[X]$ pour $i=1,\ldots,n$.
 
   \begin{enumerate}
 
-    \item Montrer que la définition de courbe polynomiale de degré $d$ ne dépend pas du repère choisie.
+    \item Montrer que la définition de courbe polynomiale de degré $k$ ne dépend pas du repère choisie.
 
-    \item Montrer que toute courbe polynomiale $M(t)$ de degré $d$ peut s'écrire de façon unique comme courbe de Bézier d'ordre $d$.
+    \item Montrer que toute courbe polynomiale $M(t)$ de degré $k$ peut s'écrire de façon unique comme courbe de Bézier d'ordre $k$.
 
-    \item En déduire que toute spline de degré $k$ avec $n+1$ nœuds peut être réalisé comme la jonction de $n$ courbe de Bézier d'ordre $k$.
+    \item En déduire que toute spline de degré $k$ avec $n+1$ nœuds distincts peut être réalisé comme la jonction de $n$ courbe de Bézier d'ordre $k$.
 
     \item Redémontrer la question (\ref{exo:elev:gen}) de l'exercice \ref{exo:elev}.
 
@@ -104,7 +104,7 @@
     S(t) =
       \begin{cases}
         M(2t) & \text{ si } t \in [0,\frac12[ \\
-        M(2t-1) & \text{ si } t \in [\frac12,1] \\
+        N(2t-1) & \text{ si } t \in [\frac12,1] \\
       \end{cases}
   $$
   \begin{enumerate}
@@ -113,6 +113,7 @@
     \item Sous quelle condition sur les points de contrôle la courbe $S$ est $C^{1}$ ?
 
     \item Sous quelle condition sur les points de contrôle la courbe $S$ est $C^{k}$ ?
+    %\textit{Indication :} On généralise $\Delta_{i}$ en posant $\Delta_{[A_{0},\ldots,A_{k}]} = \sum_{i=0}^{k}\binom{k}{i}(-1)^{n-i}A_{i}$ de sorte que $\Delta_{i} = \Delta_{[A_{i},A_{i+1}]}$. Pius on a la condition $\Delta_{[A_{n-k},\ldots,A_{n}]} = \Delta_{[B_{0},\ldots,B_{k}]}$.
   \end{enumerate}
 
 \end{exo}
