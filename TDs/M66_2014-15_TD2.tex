@@ -27,7 +27,7 @@
 
     \item\label{exo:base:bords} Montrer qu'il existe une constante $\lambda$, à déterminer, telle que $M'(0)=\lambda\overrightarrow{A_{0}A_{1}}$ et $M'(1)=\lambda\overrightarrow{A_{n-1}A_{n}}$.
 
-    \item\label{exo:base:allignes} Montrer que si les $A_{i}$ sont tous alignées et équidistants, alors $M(t) = (1-t) A_{0} + t A_{n}$.
+    \item\label{exo:base:allignes} Montrer que si les $A_{i}$ sont tous alignés et équidistants, alors $M(t) = (1-t) A_{0} + t A_{n}$.
 
     \item\label{exo:base:B} Soit $B:V^{n} \longrightarrow V^{[0,1]}$, l'application qui associe aux $n+1$ points de $V$ la courbe de Bézier d'ordre $n$, ayant ces points comme points de contrôle.
     Montrer que $B$ est une application affine, et que si $V$ est un espace vectoriel, alors $B$ est linéaire.
@@ -40,11 +40,11 @@
 %-----------------------------------
 \begin{exo}\label{exo:elev} (Élévation de degré)
 
-   Soit $A_{0}=(0,1)$ , $A_{1}=(1,1)$, $A_{2}=(1,0)$.
+   Soient $A_{0}=(0,1)$ , $A_{1}=(1,1)$, $A_{2}=(1,0)$.
    \begin{enumerate}
-     \item Calculer la courbe de Bézier ayant $A_{0}$,$ A_{1}$ et $A_{2}$ pour points de contrôle. Dessiner là.
+     \item Calculer la courbe de Bézier ayant $A_{0}$,$ A_{1}$ et $A_{2}$ pour points de contrôle. La dessiner.
 
-     \item Montrer qu'il existe des points $B_{0}$, $B_{1}$, $B_{2}$ et $B_{3}$ tels que la courbe de Bézier associée soit la même que pour les points $A_{0}$,$ A_{1}$ et $A_{2}$.
+     \item Montrer qu'il existe des points $B_{0}$, $B_{1}$, $B_{2}$ et $B_{3}$ tels que la courbe de Bézier associée soit la même que pour les points $A_{0}$, $ A_{1}$ et $A_{2}$.
 
      \item\label{exo:elev:gen} Comment peut-on généraliser la question précédente pour $n+1$ points $A_{0},\ldots,A_{n}$ quelconques?
      \textit{Indication :} $B_{i} = \frac{i}{n+1}A_{i-1}+\frac{n+1-i}{n+1}A_{i}$ pour $i=1,...,n$.
@@ -62,9 +62,9 @@
       B_{[A_{0},\ldots,A_{n}]}(t) = (1-t)B_{[A_{0},\ldots,A_{n-1}]}(t) +tB_{[A_{1},\ldots,A_{n}]}(t).
     $$
 
-    \item En déduire de la question précédente la question (\ref{exo:base:allignes}) de l'exercice \ref{exo:base}.
+    \item Déduire, de la question précédente, la question (\ref{exo:base:allignes}) de l'exercice \ref{exo:base}.
 
-    \item Soit $B'_{[A_{0},\ldots,A_{n}]}$ la courbe dérivée de $B_{[A_{0},\ldots,A_{n}]}$. Montre (par récurrence) que
+    \item Soit $B'_{[A_{0},\ldots,A_{n}]}$ la courbe dérivée de $B_{[A_{0},\ldots,A_{n}]}$. Montrer (par récurrence) que
     $$
       B'_{[A_{0},\ldots,A_{n}]} = n\left(B_{[A_{1},\ldots,A_{n}]} - B_{[A_{0},\ldots,A_{n-1}]}\right)
     $$
@@ -74,7 +74,7 @@
       B'_{[A_{0},\ldots,A_{n}]} = nB_{[\Delta_{0},\ldots,\Delta_{n-1}]}.
     $$
 
-    \item En déduire de la question précédente la question (\ref{exo:base:bords}) de l'exercice \ref{exo:base}.
+    \item Déduire, de la question précédente, la question (\ref{exo:base:bords}) de l'exercice \ref{exo:base}.
   \end{enumerate}
 \end{exo}
 
@@ -85,11 +85,11 @@
 
   \begin{enumerate}
 
-    \item Montrer que la définition de courbe polynomiale de degré $k$ ne dépend pas du repère choisie.
+    \item Montrer que la définition de courbe polynomiale de degré $k$ ne dépend pas du repère choisi.
 
     \item Montrer que toute courbe polynomiale $M(t)$ de degré $k$ peut s'écrire de façon unique comme courbe de Bézier d'ordre $k$.
 
-    \item En déduire que toute spline de degré $k$ avec $n+1$ nœuds distincts peut être réalisé comme la jonction de $n$ courbe de Bézier d'ordre $k$.
+    \item En déduire que toute spline de degré $k$ avec $n+1$ nœuds distincts peut être réalisée comme la jonction de $n$ courbes de Bézier d'ordre $k$.
 
     \item Redémontrer la question (\ref{exo:elev:gen}) de l'exercice \ref{exo:elev}.
 
@@ -99,7 +99,7 @@
 %-------------------------------------
 \begin{exo} (Jonction de courbes de Bézier)
 
-  Soit $A_{0}$, $A_{1}$,\dots, $A_{n}$ et $B_{0}$, $B_{1}$,\dots, $B_{n}$ deux ensembles de points de contrôle pour deux courbes de Bézier $M(t)$ et $N(t)$, $t \in [0,1]$. On considère la courbe paramétré
+  Soient $A_{0}$, $A_{1}$,\dots, $A_{n}$ et $B_{0}$, $B_{1}$,\dots, $B_{n}$ deux ensembles de points de contrôle pour deux courbes de Bézier $M(t)$ et $N(t)$, $t \in [0,1]$. On considère la courbe paramétrée
   $$
     S(t) =
       \begin{cases}
@@ -108,11 +108,11 @@
       \end{cases}
   $$
   \begin{enumerate}
-    \item Sous quelle condition sur les points de contrôle la courbe $S$ est continue ?
+    \item Sous quelle condition sur les points de contrôle la courbe $S$ est-elle continue ?
 
-    \item Sous quelle condition sur les points de contrôle la courbe $S$ est $C^{1}$ ?
+    \item Sous quelle condition sur les points de contrôle la courbe $S$ est-elle $C^{1}$ ?
 
-    \item Sous quelle condition sur les points de contrôle la courbe $S$ est $C^{k}$ ?
+    \item Sous quelle condition sur les points de contrôle la courbe $S$ est-elle $C^{k}$ ?
     %\textit{Indication :} On généralise $\Delta_{i}$ en posant $\Delta_{[A_{0},\ldots,A_{k}]} = \sum_{i=0}^{k}\binom{k}{i}(-1)^{n-i}A_{i}$ de sorte que $\Delta_{i} = \Delta_{[A_{i},A_{i+1}]}$. Pius on a la condition $\Delta_{[A_{n-k},\ldots,A_{n}]} = \Delta_{[B_{0},\ldots,B_{k}]}$.
   \end{enumerate}
 
