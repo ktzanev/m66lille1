@@ -81,15 +81,15 @@ Soit $A \in \mathcal{M}_{m,n}(\mathbb{R})$ et $\{ \nu_{1} \geq \nu_{2} \geq \cdo
 
         \item Soit $A$ symétrique. Montrer que les valeurs singulières de $A$ sont les valeurs absolues des valeurs propres de $A$.
 
-        \item Soit $U \in \mathcal{O}_{m}(\mathbb{R})$ et $V \in \mathcal{O}_{n}(\mathbb{R})$. Montrer que $\| U^{t} A  V\|_{2} = \| A \|_{2}$ et que $\| U^{t} A  V\|_{F} = \| A \|_{2}$, où $\| A \|_{2}$ et $\| A \|_{F}$ sont respectivement la $2$-norme d'opérateur de $A$ et la norme de Frobenius de $A$.
+        \item Soit $U \in \mathcal{O}_{m}(\mathbb{R})$ et $V \in \mathcal{O}_{n}(\mathbb{R})$. Montrer que $\| U^{t} A  V\|_{2} = \| A \|_{2}$ et que $\| U^{t} A  V\|_{F} = \| A \|_{F}$, où $\| A \|_{2}$ et $\| A \|_{F}$ sont respectivement la $2$-norme d'opérateur de $A$ et la norme de Frobenius de $A$.
 
         \item En déduire que $\| A \|_{2} = \nu_{1}$ et que $\| A \|_{F} = \sqrt{\nu_{1}^{2}+\cdots+\nu_{p}^{2}}$.
 
-        \item Soit $\rang A = r$ et $k < r$. On note $\mathcal{M}^{k} \subset \mathcal{M}_{m,n}(\mathbb{R})$ les matrices de rang $k$.  Déterminer un majorant de $\inf_{M \in \mathcal{M}^{k}}\| A - M\|_{2}$, et un majorant de $\inf_{M \in \mathcal{M}^{k}}\| A - M\|_{F}$.
+        \item Soit $\rang A = r$ et $k < r$. On note $\mathcal{M}^{k} \subset \mathcal{M}_{m,n}(\mathbb{R})$ les matrices de rang au plus $k$.  Déterminer un majorant de $\inf_{M \in \mathcal{M}^{k}}\| A - M\|_{2}$, et un majorant de $\inf_{M \in \mathcal{M}^{k}}\| A - M\|_{F}$. D'après quel résultat du cours, on peut affirmer que ces $\inf$ sont des $\min$ et déterminer leur valeur.
 
-        \item Si on identifie une image $m \times n$ pixels en niveaux de gris avec une matrice $A \in \mathcal{M}_{m,n}([0,1])$, comment peut on construire «une bonne» approximation par une image dont la matrice est dans $\mathcal{M}^{k}$.
+        \item Si on identifie une image $m \times n$ pixels en niveaux de gris avec une matrice $A \in \mathcal{M}_{m,n}([0,1])$, comment peut on construire «la meilleure» approximation par une image dont la matrice est dans $\mathcal{M}^{k}$.
 
-        \item Soit $A \in \mathcal{M}_{480,640}([0,1])$ une matrice qui encode une image de $480 \times 640$ pixels en niveaux de gris, dont les valeurs singulières sont majorées par $\nu_{i} \leq \frac{10^{3}}{i(i+1)}$. On considère une matrice $M_{100} \in \mathcal{M}^{100}$ qui représente «une bonne» approximation de rang $100$. Donner une estimation de l'erreur quadratique moyen de cette approximation.
+        \item Soit $A \in \mathcal{M}_{480,640}([0,1])$ une matrice qui encode une image de $480 \times 640$ pixels en niveaux de gris, dont les valeurs singulières sont majorées par $\nu_{i} \leq \frac{10^{3}}{i(i+1)}$. On considère une matrice $M_{100} \in \mathcal{M}^{100}$ qui représente «la meilleure» approximation de rang $100$. Donner une estimation de l'erreur quadratique moyenne de cette approximation.
     \end{enumerate}
 \end{exo}
 
