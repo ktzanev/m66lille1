@@ -1,0 +1,116 @@
+\documentclass[a4paper,12pt,reqno]{amsart}
+\usepackage{macros_M66}
+
+\begin{document}
+\hautdepage{TD3: Valeurs singulières, moindres carrés}
+
+
+%-----------------------------------
+\begin{exo} (Propriétés de base)
+
+    Soit $A\in{\mathcal M}_{m,n}(\R)$ de rang $r\leq p=\min (m,n)$. On considère la décomposition en valeurs singulières de $A$
+    $$
+        U^tAV = \mbox{diag} (\nu_1, \ldots , \nu_p )
+    $$
+    où les $\nu_i$ sont les valeurs singulières de $A$. On note $(U_i)_{1\leq i\leq m}$ les vecteurs colonnes de $U$ et $(V_i)_{1\leq i\leq n}$ ceux de $V$.
+
+    \begin{enumerate}
+        \item Quel sens donne-t-on ici à la notation $\mbox{diag} (\nu_1, \cdots , \nu_p )$ ? Quelle conséquence a l'hypothèse ${\rm rang} A=r$ sur les valeurs singulières ? (On pourra ordonner les valeurs singulières de telle façon que les premières soient non nulles).
+
+        \item Montrer que~:
+        $
+            A=\displaystyle\sum_{i=1}^r \nu_i U_i V_i^t
+        $
+        et que~:
+        $
+            A^t A= \displaystyle\sum_{i=1}^r \nu_i^2 V_i V_i^t.
+        $
+
+        \item Montrer que $\Im(A)=\Vect\{U_1, U_2, \cdots , U_r\}$ et $\Ker(A)=\Vect\{V_{r+1}, \cdots , V_n\}$.
+
+        \item  Montrer que $\Im(A^t)=\Vect\{V_1, V_2, \cdots , V_r\}$ et
+        $\Ker(A^t)=\Vect\{U_{r+1}, \cdots , U_m\}$.
+
+        \item Déterminer les matrices des projections orthogonales sur $\Im(A)$, $\Ker(A)$, $\Im(A^t)$, $\Ker(A^t)$ à l'aide des $(U_i)_{1\leq i\leq m}$ et des $(V_i)_{1\leq i\leq n}$.
+    \end{enumerate}
+\end{exo}
+
+%-----------------------------------
+\begin{exo} (Un cas concret)
+
+    Soit
+    $$
+        A = \begin{pmatrix}
+                1  & -1 \\
+                0  & -1 \\
+                -1 & 0
+            \end{pmatrix}
+        \quad\text{et}\quad
+        b = \begin{pmatrix}
+                3 \\
+                0 \\
+                3
+            \end{pmatrix}.
+    $$
+    \begin{enumerate}
+        \item Calculer les valeurs singulières de $A$.
+
+        \item Quel est le rang de $A$ ?
+
+        \item Déterminer la décomposition en valeurs singulières de $A$.
+
+        \item Déterminer les matrices des projections orthogonales sur $\Im(A)$ et $\Ker(A)$.
+
+        \item Déterminer une solution au sens des moindres carrés du système $Ax=b$.
+
+        \item Cette solution est-elle unique ?
+    \end{enumerate}
+\end{exo}
+
+
+%-----------------------------------
+\begin{exo} (Approximations de rang inférieur)
+
+Soit $A \in \mathcal{M}_{m,n}(\mathbb{R})$ et $\{ \nu_{1} \geq \nu_{2} \geq \cdots \geq \nu_{p}\}$ les valeurs singulière de $A$.
+
+    \begin{enumerate}
+
+        \item Montrer que les valeurs singulières non nulles de $A$ sont les racines carrés des valeurs propres non nulles de $A^{t}A$ et $AA^{t}$.
+
+        \item Dans le cas $m=n$, montrer que $ |\det(A)| = \prod_{i=1}^{p} \nu_{i}$.
+
+        \item Soit $A$ symétrique. Montrer que les valeurs singulières de $A$ sont les valeurs absolues des valeurs propres de $A$.
+
+        \item Soit $U \in \mathcal{O}_{m}(\mathbb{R})$ et $V \in \mathcal{O}_{n}(\mathbb{R})$. Montrer que $\| U^{t} A  V\|_{2} = \| A \|_{2}$ et que $\| U^{t} A  V\|_{F} = \| A \|_{2}$, où $\| A \|_{2}$ et $\| A \|_{F}$ sont respectivement la $2$-norme d'opérateur de $A$ et la norme de Frobenius de $A$.
+
+        \item En déduire que $\| A \|_{2} = \nu_{1}$ et que $\| A \|_{F} = \sqrt{\nu_{1}^{2}+\cdots+\nu_{p}^{2}}$.
+
+        \item Soit $\rang A = r$ et $k < r$. On note $\mathcal{M}^{k} \subset \mathcal{M}_{m,n}(\mathbb{R})$ les matrices de rang $k$.  Déterminer un majorant de $\inf_{M \in \mathcal{M}^{k}}\| A - M\|_{2}$, et un majorant de $\inf_{M \in \mathcal{M}^{k}}\| A - M\|_{F}$.
+
+        \item Si on identifie une image $m \times n$ pixels en niveaux de gris avec une matrice $A \in \mathcal{M}_{m,n}([0,1])$, comment peut on construire «une bonne» approximation par une image dont la matrice est dans $\mathcal{M}^{k}$.
+
+        \item Soit $A \in \mathcal{M}_{480,640}([0,1])$ une matrice qui encode une image de $480 \times 640$ pixels en niveaux de gris, dont les valeurs singulières sont majorées par $\nu_{i} \leq \frac{10^{3}}{i(i+1)}$. On considère une matrice $M_{100} \in \mathcal{M}^{100}$ qui représente «une bonne» approximation de rang $100$. Donner une estimation de l'erreur quadratique moyen de cette approximation.
+    \end{enumerate}
+\end{exo}
+
+%-----------------------------------
+\begin{exo} (Solution au sens des moindres carrés)
+
+    Soit $A\in {\mathcal M}_{n,p}(\R)$ une matrice rectangulaire avec $p \leq n$. On considère le système linéaire $AX=b$, noté dans la suite $({\mathcal S})$.
+    \begin{enumerate}
+        \item Déterminer dans quels espaces sont situés l'inconnue $X$ et le second membre $b$.
+
+        \item Déterminer dans quel cas $({\mathcal S})$ n'a pas de solution.
+
+        \item Déterminer dans quel cas $({\mathcal S})$ admet au moins une solution et dans quel cas cette solution est unique.
+
+        \item On suppose que $X$ est solution de $({\mathcal S})$. Vérifier que $X$ est alors solution de $A^tAX=A^tb$, système noté $({\mathcal S}')$.
+
+        \item Démontrer que le système $({\mathcal S}')$ admet toujours une solution et préciser dans quel cas elle est unique.
+
+        \item On suppose maintenant ${\rm rang}(A)=p$ et on note $X_0$ la solution de $({\mathcal S}')$. Démontrer que $b-AX_0$ est orthogonal à l'espace vectoriel $\Im(A)$. En déduire que $X_0$ est la solution au sens des moindres carrés du système $({\mathcal S})$.
+    \end{enumerate}
+\end{exo}
+
+
+\end{document}
