@@ -1,5 +1,6 @@
 \documentclass[a4paper,12pt,reqno]{amsart}
 \usepackage{macros_M66}
+\newgeometry{top=21mm,left=23mm,right=21mm,bottom=21mm, nohead, nofoot}
 
 \begin{document}
 \hautdepage{TD3: Valeurs singulières, moindres carrés}
@@ -35,10 +36,11 @@
     \end{enumerate}
 \end{exo}
 
+
 %-----------------------------------
 \begin{exo} (Un cas concret)
 
-    Soit
+    Soient
     $$
         A = \begin{pmatrix}
                 1  & -1 \\
@@ -71,44 +73,49 @@
 %-----------------------------------
 \begin{exo} (Approximations de rang inférieur)
 
-Soit $A \in \mathcal{M}_{m,n}(\mathbb{R})$ et $\{ \nu_{1} \geq \nu_{2} \geq \cdots \geq \nu_{p}\}$ les valeurs singulière de $A$.
+Soient $A \in \mathcal{M}_{m,n}(\mathbb{R})$ et $\{ \nu_{1} \geq \nu_{2} \geq \cdots \geq \nu_{p}\}$ les valeurs singulières de $A$.
 
     \begin{enumerate}
 
-        \item Montrer que les valeurs singulières non nulles de $A$ sont les racines carrés des valeurs propres non nulles de $A^{t}A$ et $AA^{t}$.
+        \item Montrer que les valeurs singulières non nulles de $A$ sont les racines carrées des valeurs propres non nulles de $A^{t}A$ et $AA^{t}$.
 
         \item Dans le cas $m=n$, montrer que $ |\det(A)\,| = \prod_{i=1}^{p} \nu_{i}$.
 
         \item Soit $A$ symétrique. Montrer que les valeurs singulières de $A$ sont les valeurs absolues des valeurs propres de $A$.
 
-        \item Soit $U \in \mathcal{O}_{m}(\mathbb{R})$ et $V \in \mathcal{O}_{n}(\mathbb{R})$. Montrer que $\| U^{t} A  V\|_{2} = \| A \|_{2}$ et que $\| U^{t} A  V\|_{F} = \| A \|_{F}$, où $\| A \|_{2}$ et $\| A \|_{F}$ sont respectivement la $2$-norme d'opérateur de $A$ et la norme de Frobenius de $A$.
+        \item Soient $U \in \mathcal{O}_{m}(\mathbb{R})$ et $V \in \mathcal{O}_{n}(\mathbb{R})$. Montrer que $\| U^{t} A  V\|_{2} = \| A \|_{2}$ et que $\| U^{t} A  V\|_{F} = \| A \|_{F}$, où $\| A \|_{2}$ et $\| A \|_{F}$ sont respectivement la $2$-norme d'opérateur de $A$ et la norme de Frobenius de $A$.
 
         \item En déduire que $\| A \|_{2} = \nu_{1}$ et que $\| A \|_{F} = \sqrt{\nu_{1}^{2}+\cdots+\nu_{p}^{2}}$.
 
-        \item Soit $\rang A = r$ et $k < r$. On note $\mathcal{M}^{k} \subset \mathcal{M}_{m,n}(\mathbb{R})$ les matrices de rang au plus $k$.  Déterminer un majorant de $\inf_{M \in \mathcal{M}^{k}}\| A - M\|_{2}$, et un majorant de $\inf_{M \in \mathcal{M}^{k}}\| A - M\|_{F}$. D'après quel résultat du cours on peut déterminer les valeurs de ces $\inf$ et affirmer qu'ils sont des $\min$.
+        \item Soit $\rang A = r$ et $k < r$. On note $\mathcal{M}^{k} \subset \mathcal{M}_{m,n}(\mathbb{R})$ les matrices de rang au plus $k$.  Déterminer un majorant de $\inf_{M \in \mathcal{M}^{k}}\| A - M\|_{2}$, et un majorant de $\inf_{M \in \mathcal{M}^{k}}\| A - M\|_{F}$. D'après quel résultat du cours peut-on déterminer les valeurs de ces $\inf$ et affirmer qu'elles sont des $\min$?
 
-        \item Si on identifie une image $m \times n$ pixels en niveaux de gris avec une matrice $A \in \mathcal{M}_{m,n}([0,1])$, comment peut on construire «la meilleure» approximation par une image dont la matrice est dans $\mathcal{M}^{k}$.
+        \item Si on identifie une image $m \times n$ pixels en niveaux de gris avec une matrice $A \in \mathcal{M}_{m,n}([0,1])$, comment peut-on construire «la meilleure» approximation par une image dont la matrice est dans $\mathcal{M}^{k}$?
 
         \item Soit $A \in \mathcal{M}_{480,640}([0,1])$ une matrice qui encode une image de $480 \times 640$ pixels en niveaux de gris, dont les valeurs singulières sont majorées par $\nu_{i} \leq \frac{10^{3}}{i(i+1)}$. On considère une matrice $M_{100} \in \mathcal{M}^{100}$ qui représente «la meilleure» approximation de rang $100$. Donner une estimation de l'erreur quadratique moyenne de cette approximation.
     \end{enumerate}
 \end{exo}
 
+
 %-----------------------------------
 \begin{exo} (Solution au sens des moindres carrés)
 
-    Soit $A\in {\mathcal M}_{n,p}(\R)$ une matrice rectangulaire avec $p \leq n$. On considère le système linéaire $AX=b$, noté dans la suite $({\mathcal S})$.
+    Soit $A\in {\mathcal M}_{n,p}(\R)$ une matrice rectangulaire avec $p \leq n$. On considère le système linéaire $AX=B$, noté dans la suite $({\mathcal S})$.
     \begin{enumerate}
-        \item Déterminer dans quels espaces sont situés l'inconnue $X$ et le second membre $b$.
+        \item Déterminer dans quels espaces sont situés l'inconnue $X$ et le second membre $B$.
 
         \item Déterminer dans quel cas $({\mathcal S})$ n'a pas de solution.
 
         \item Déterminer dans quel cas $({\mathcal S})$ admet au moins une solution et dans quel cas cette solution est unique.
 
-        \item On suppose que $X$ est solution de $({\mathcal S})$. Vérifier que $X$ est alors solution de $A^tAX=A^tb$, système noté $({\mathcal S}')$.
+        \item On suppose que $X$ est solution de $({\mathcal S})$. Vérifier que $X$ est alors solution de $A^tAX=A^tB$, système noté $({\mathcal S}')$.
 
         \item Démontrer que le système $({\mathcal S}')$ admet toujours une solution et préciser dans quel cas elle est unique.
 
-        \item On suppose maintenant ${\rm rang}(A)=p$ et on note $X_0$ la solution de $({\mathcal S}')$. Démontrer que $b-AX_0$ est orthogonal à l'espace vectoriel $\Im(A)$. En déduire que $X_0$ est la solution au sens des moindres carrés du système $({\mathcal S})$.
+        \item Soit $X_0$ une solution de $({\mathcal S}')$. Démontrer que $B-AX_0$ est orthogonal à l'espace vectoriel $\Im(A)$. En déduire que $X_0$ est une solution au sens des moindres carrés du système $({\mathcal S})$.
+
+        \item On suppose maintenant que $\rang A = p$. Exprimer la solution $X_{0}$ au sens des moindres carrés du système $({\mathcal S})$ en fonction de $A$ et de $B$.
+
+        % \item Soit $A = U\mbox{diag} (\nu_1, \ldots , \nu_p )V^{t}$ est la décomposition en valeurs singulières de $A$ ($\rang A = p$). Exprimer la solution $X_{0}$ au sens des moindres carrés du système $({\mathcal S})$ en fonction de $U$, $V$, $B$ et les $\{\nu_{i}\}_{\substack{\vphantom{,}\\i=1,\dots,p}}$.
     \end{enumerate}
 \end{exo}
 
