@@ -26,7 +26,7 @@ Pour chaque exercice, il va falloir créer un fichier, \cmd{tp3\_exo1.sce}, \dot
   $$
 où les $\{\nu_1 \geq \cdots \geq \nu_p > 0\}$ sont les valeurs singulières non nulles de $A$.
 
-La commande \cmd{Scilab} qui permet d'obtenir cette décomposition pour une matrice \sclb{A} est \sclb{[U,S,V] = svd(A)}.
+La commande \cmd{Scilab} qui permet d'obtenir cette décomposition pour une matrice \sclb{A} est \sclb{[U,S,V] = svd(A)}. Et pour obtenir juste les valeurs singulières dans un vecteur \sclb{s}$=(\nu_{1},\ldots,\nu_{p})$ il suffit de faire \sclb{s = svd(A)}.
 
 % ----------------------------------
 \subsection*{Approximation de rang inférieur}
