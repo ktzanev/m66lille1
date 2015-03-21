@@ -1,0 +1,183 @@
+\documentclass[a4paper,12pt,reqno]{amsart}
+\usepackage{macros_M66}
+\newgeometry{top=21mm,left=23mm,right=21mm,bottom=21mm, nohead, nofoot}
+
+\renewcommand{\theequation}{\fnsymbol{equation}}
+
+\begin{document}
+\hautdepage{TD4: EDO -- Différences Finies}
+
+
+%-----------------------------------
+\begin{exo}
+
+  Soit le problème de Cauchy
+    \[
+      y''(x)+xy'(x)+(1+x)y(x)=x^2, \quad y(0)=0, \quad y'(0)=1.
+    \]
+  \begin{enumerate}
+    \item Transformer cette EDO en un système différentiel du premier ordre équivalent.
+    \item Effectuer deux étapes du schéma d'Euler explicite avec un pas $h=1/2$. Déterminer les approximations de $y$, $y'$ et $y''$ aux points $x_1=1/2$ et $x_2=1$.
+  \end{enumerate}
+\end{exo}
+
+%-----------------------------------
+\begin{exo}
+
+  Soit l'EDO
+    \[
+      y'(x)=\sqrt{y(x)}, \quad y(0)=0.
+    \]
+  \begin{enumerate}
+    \item Trouver une solution à cette EDO autre que la solution triviale $y \equiv 0$.
+    \item Le théorème de Cauchy-Lipschitz assure l'unicité d'une solution. Quelle hypothèse du théorème n'est pas satisfaite ici?
+    \item Que donne le schéma d'Euler explicite?
+    \item Que donne le schéma d'Euler implicite?
+    \item Montrer que pour une condition initiale $y(0) > 0$ la solution est unique. Décrire les solutions maximales dans ce cas.
+    \item Comment peut-on essayer d'approcher ces solutions maximales avec un schéma d'Euler ? Que risque de se passer pour $t_{n} \rightarrow -\infty$ ?
+
+  \end{enumerate}
+\end{exo}
+
+%-----------------------------------
+\begin{exo}
+
+  On considère le problème de Cauchy suivant:
+    \begin{equation}\label{eq:sin}
+      u'=\sin^3 u, \quad u(0)=u_{0}
+    \end{equation}
+  \begin{enumerate}
+    \item Déterminer les solutions constantes du problème.
+    \item Montrer que la fonction $f:u\mapsto \sin^3u$ est globalement lipschitzienne.
+    \item Montrer que pour toute condition initiale le problèmes de Cauchy admet une unique solution. Décrire le comportement des solutions en fonction de $u_{0}$.
+    \item Montrer que les solutions maximales sont globales (définies sur $\mathbb{R}$ tout entier).
+    \item Soit $v$ et $w$ deux solutions de \eqref{eq:sin} pour deux conditions initiales différentes $v_{0}$ et $w_{0}$. Majorer la différence $|v(t)-w(t)|$ pour $t\geq 0$ par le lemme de Grönwall en fonction de $t$ et $|v_{0}-w_{0}|$. Est-ce une bonne estimation dans notre cas ?
+    \item Écrire le schéma d'Euler explicite associé à une discrétisation uniforme de pas $h > 0$.
+    \item Soit $u$ la solution exacte de \eqref{eq:sin} avec $u_{0} = \frac{\pi}{2}$. Soient $h \leq \frac{2}{3}$ et $u_{n}$ la $n$-ème valeur obtenue par le schéma d'Euler explicite. Montrer que $\lim_{n \rightarrow \infty}|u(nh)-u_{n}|=0$.
+
+  \end{enumerate}
+\end{exo}
+
+%-----------------------------------
+\begin{exo}
+
+  On s'intéresse à la résolution numérique de l'équation différentielle ordinaire
+  \[
+    \left \{
+      \begin{aligned}
+        x'(t)  &= f(t,x(t)), \quad t\in I_0=[t_0,t_0+T],\\
+        x(t_0) &= x_0.
+      \end{aligned}
+    \right .
+  \]
+  On suppose $f$ régulière. On introduit une subdivision uniforme $t_0<t_1<\cdots<t_N=t_0+T$ et on pose $h=t_{n+1}-t_n=T/N$, de telle sorte que $t_n=nh+t_0$ pour $0\leq n\leq N$.
+  \begin{enumerate}
+    \item Trouver $a$, $b$ et $c$ pour que la formule de quadrature suivante soit d'ordre maximal:
+      \[
+        \int_{t_n}^{t_{n+2}}\psi(t) dt + 4 \int_{t_n}^{t_{n+1}}\psi(t) dt
+          \approx
+            h \big( a\psi(t_{n+2})+b\psi(t_{n+1}) + c\psi(t_n)\big).
+      \]
+    \item Montrer que l'on peut approcher l'équation différentielle par le schéma numérique
+      \[
+        \left\{
+          \begin{array}{l}
+            X_0 \text{ et } X_1 \text{ donnés,}\\
+            X_{n+2} + 4 X_{n+1} - 5 X_n = 6 h\Big(\dfrac{2}{3} f(t_{n+1},X_{n+1}) +
+             \dfrac{1}{3}  f(t_n,X_n)\Big).
+          \end{array}
+        \right.
+      \]
+    \item On suppose désormais $f\equiv0$. Calculer $X_n$ en fonction de $X_0$ et $X_1$.
+    \item On suppose, dans cette question uniquement, que $X_1 = X_0 = x_0$. Montrer que, pour tout $0 \leq n \leq N$, $e_n = |x(t_n)-X_n| = 0$.
+    \item Que se passe-t-il lorsque $X_0 = x_0$ et $X_1 = X_0 + C h^p$?
+  \end{enumerate}
+\end{exo}
+
+%-----------------------------------
+\begin{exo}
+
+  On considère l'équation différentielle ordinaire
+    \[
+      \left \{
+        \begin{aligned}
+          x'(t)+\lambda(t)x(t) &= b(t), \quad t\in I_0=\mathbb{R}_+,\\
+          x(0) &= x_0>0.
+        \end{aligned}
+      \right .
+    \]
+  avec $\lambda$ et $b$ des fonctions régulières.
+  \begin{enumerate}
+    \item Écrire la solution de l'EDO.
+    \item Montrer que si $b$ est une fonction positive, alors $x$ est positive pour toute fonction $\lambda$.
+    \item Écrire le schéma d'Euler explicite associé à une discrétisation uniforme de pas $h>0$.
+    \item On suppose désormais que $\lambda$ et $b$ sont des constantes, avec $b>0$ et $\lambda>0$. Sous quelle(s) condition(s) le schéma d'Euler conserve-t-il la positivité de la solution?
+    \item Soient $\lambda=1$ et $b=2$. Représenter la solution. Faire de même avec la solution de l'approximation pour $x_0=1$ et $h=1/2$, $h=3/2$ et $h=5/2$, puis $x_0=5$ et $h=3/2$. Pouvait-on prévoir ces résultats?
+  \end{enumerate}
+\end{exo}
+
+%-----------------------------------
+\begin{exo}
+
+  Soit $f$ une fonction de classe ${\mathcal{C}}^3$ sur $[0,T] \times \mathbb{R}$ à valeurs dans $\mathbb{R}$. On considère l'équation différentielle :
+  \begin{equation}\label{equ1}
+    \begin{cases}
+      u'(t)=f(t,u(t)) \,, \quad t \in ]0,T] & \\
+      u(0)=u_0 \,.
+    \end{cases}
+  \end{equation}
+  Étant donné $K \in \mathbb{N}^*$, on fixe le pas de temps $\Delta t=T/K > 0$ et on note $t_n = n\, \Delta t$, $n = 0, \ldots, K$ et $U_n$  l'approximation de $u(t_n)$.
+
+  On considère le schéma de Heun\footnote{Le schéma de Heun a un ordre de consistance supérieure au schéma d'Euler explicite.} donné par la formule de récurrence pour $n=0,\dots, K-1$~:
+  \[
+    \begin{cases}
+      V_{n+1} = U_n + \Delta t \, f(t_n,U_n) \,, \\
+      U_{n+1} = U_n + \dfrac{\Delta t}{2} \, \big( f(t_n,U_n) + f(t_{n+1},V_{n+1}) \big) .
+    \end{cases}
+  \]
+  \begin{enumerate}
+    \item Interpréter graphiquement la méthode de Heun sur l'intervalle de temps $[t_n, t_{n+1}]$. Expliquer le dessin.
+
+    \item Pour définir l'erreur de consistance de l'étape $n$ du schéma de Heun, on suppose : $U_n=u(t_n)$. Écrire $e_{n+1} = \varepsilon_{n+1} + \varepsilon_{n+1}^*$, où
+    $\varepsilon_{n+1} = u(t_n+\Delta t) -u(t_n) - \Delta t \,u'(t_n + \dfrac{\Delta t}{2})$. Donner l'expression de $\varepsilon_{n+1}^*$ et montrer par un développement de Taylor que l'erreur $\varepsilon_{n+1}$ est en $\Delta t^3$, en précisant la constante.
+
+    \item À l'aide de la formule de récurrence et d'un autre développement de Taylor, évaluer $\varepsilon_{n+1}^*$ en fonction de $\Delta t$ et montrer que le schéma de Heun est d'ordre $2$.
+
+  \end{enumerate}
+
+\end{exo}
+
+%-----------------------------------
+\begin{exo}
+
+  Soit l'équation différentielle ordinaire suivante :
+  \begin{equation}
+    \label{equadif2}
+    \left\{
+      \begin{aligned}
+        y'(t) &= y^2(t), \quad t \in [0,T], \quad T<1,\\
+        y(0)  &= 1.
+      \end{aligned}
+    \right.
+  \end{equation}
+  \begin{enumerate}
+    \item Donner la solution de l'équation différentielle (dont on supposera l'unicité).
+    \item On choisit, pour la résolution de \eqref{equadif2}, le schéma d'Euler implicite à pas variable:
+      \begin{equation}
+        \label{EUI}
+        y_{n+1} = y_n+ h_n \; f(t_{n+1},y_{n+1}).
+      \end{equation}
+      \begin{enumerate}
+        \item Donner l'équation du second degré vérifiée par $y_{n+1}$ correspondant à l'utilisation du schéma \eqref{EUI} pour la résolution de \eqref{equadif2}.
+        \item Donner la restriction sur le pas de temps $h_n$ à vérifier afin que cette équation admette deux racines réelles.
+        \item Exprimer alors explicitement $y_{n+1}$ en fonction de $y_n$ et de $h_n$.
+        \item Quel phénomène peut-on craindre si $T$ est trop proche de 1?
+      \end{enumerate}
+    \item Mêmes questions pour le schéma de Crank-Nicolson:
+      \[
+        y_{n+1}=y_n+ \frac{h_n}{2} \left[ f(t_n,y_n)+f(t_{n+1},y_{n+1}) \right].
+      \]
+  \end{enumerate}
+\end{exo}
+
+\end{document}
