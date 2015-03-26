@@ -3,232 +3,205 @@
 
 \begin{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\hautdepage{TP4: Equations Diff\'erentielles Ordinaires}
+\hautdepage{TP4: Équations Différentielles Ordinaires}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Rappel m\'ethodes \`a un pas}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Vous êtes invités à télécharger le fichier \cmd{tp4\_fonction.sci} à partir de moodle, puis de le compléter au fur et à mesure avec les nouvelles procédures. Pour chaque exercices il va falloir créer un fichier, \cmd{tp4\_exo1.sce}, \dots, \cmd{tp4\_exo4.sce}, comportant les lignes de code correspondant à la résolution de l'exercice et incluant au début le fichier \cmd{tp4\_fonction.sci} et les autres initialisations habituelles (\sclb{clear},\sclb{clc},\ldots).
 
-L'objectif des m\'ethodes num\'eriques pour les EDO est de calculer une valeur approch\'ee de la solution du probl\`eme de Cauchy :
-\begin{equation}\label{pbcauchy}
-\left\{\begin{array}{l}
-u'(t)=f(t,u(t)),\ t>0\\
-u(0)=u_0
-\end{array}
-\right.
+% ==================================
+\section{Rappel méthodes à un pas}
+% ==================================
+
+L'objectif des méthodes numériques pour les EDO est de calculer une valeur approchée de la solution du problème de Cauchy :
+\begin{equation}\label{pbcauchy}\tag{$\star$}
+    \begin{cases}
+      u'(t)=f(t,u(t)),\quad t>0 \\
+      u(0)=u_0
+    \end{cases}
 \end{equation}
-avec $f:\R\times\R^d\to \R^d, d\geq 1$.
-Dans la suite, on se limitera au cas autonome : $f$ ne d\'ependra pas de $t$.
+avec $f: \mathbb{R} \times \mathbb{R}^d \to  \mathbb{R}^d$, $d \geq 1$.
 
-Afin de calculer une solution approch\'ee de \eqref{pbcauchy} sur un intervalle $[0,T]$, on se donne une
-subdivision de $[0,T]$, r\'eguli\`ere pour simplifier :
-$(t_n)_{0\leq n\leq N}$ avec $t_n=nh$ o\`u $h=T/N$ est le pas de la subdivision.  
+\attention{center}{Dans ce TP, pour simplifier, on se limitera au cas autonome, $f$ ne dépendra pas de $t$, et aux méthodes à pas constant.}
+
+Afin de calculer une solution approchée de \eqref{pbcauchy} sur un intervalle $[0,T]$, on se donne une subdivision régulière de $[0,T]$ :
+$(t_n)_{0\leq n\leq N}$ avec $t_n=nh$ où $h=T/N$ est le pas de la subdivision.
 On veut calculer une suite $(u_n)_{0\leq n\leq N}$ telle
-que $u_n$ soit une ``bonne'' approximation de $u(t_n)$ ($u$ solution
+que $u_n$ soit une \og{}bonne\fg{} approximation de $u(t_n)$ ($u$ solution
 exacte). \\
+Les méthodes utilisées dans ce TP sont :
 
-{\bf M\'ethode d'Euler explicite :}
-$ u_{n+1}=u_n+h f(t_n,u_n)$, avec $u_0$ pour condition initiale.
+\subsection*{Méthode d'Euler explicite :} (à programmer)\newline
+$ u_{n+1}=u_n+h f(u_n)$, avec $u_0$ pour condition initiale.
 
-{\bf M\'ethode d'Euler implicite :}
-$ u_{n+1}=u_n+h f(t_{n+1},u_{n+1})$, avec $u_0$ pour condition initiale.
+\subsection*{Méthode d'Euler implicite :} (disponible dans \cmd{tp4\_fonction.sci})\newline
+$ u_{n+1}=u_n+h f(u_{n+1})$, avec $u_0$ pour condition initiale.
 
-{\bf M\'ethode de Crank-Nicolson :}
+\subsection*{Méthode de Crank-Nicolson :} (disponible dans \cmd{tp4\_fonction.sci})\newline
 \smallskip
 \centerline{$
-u_{n+1}=u_n+\frac{h}{2}  (f(t_n,u_n)+f(t_{n+1},u_{n+1}))$, avec $u_0$ pour condition initiale.} 
+u_{n+1}=u_n+\frac{h}{2}  (f(u_n)+f(u_{n+1}))$, avec $u_0$ pour condition initiale.}
 
-{\bf M\'ethodes de Runge-Kutta (RK2)} : Euler am\'elior\'e (avec $\alpha = \frac{1}{2}$) et Heun (avec $\alpha=1$) :
-\smallskip
-$$\left\{
-\begin{array}{l}
-k_{n,1}=f(t_n,u_n)\\
-k_{n,2}=f(t_n+ \alpha h,u_n+\alpha h k_{n,1})\\
-u_{n+1}=u_n+h \bigl( \bigl(1 - \frac{1}{2\alpha}\bigl) k_{n,1}+\frac{1}{2\alpha}k_{n,2}\bigl),
-\end{array}\right.
+\subsection*{Méthodes de Runge-Kutta (RK2)} : (à programmer)\newline
+Euler amélioré (avec $\alpha = \frac{1}{2}$) et Heun (avec $\alpha=1$) :
+$$
+  \begin{cases}
+    k_{n,1}=f(u_n)\\
+    k_{n,2}=f(u_n+\alpha h k_{n,1})\\
+    u_{n+1}=u_n+h \bigl( \bigl(1 - \frac{1}{2\alpha}\bigl) k_{n,1}+\frac{1}{2\alpha}k_{n,2}\bigl),
+  \end{cases}
 $$
 avec $u_0$ pour condition initiale.
 
-{\bf M\'ethode de Runge-Kutta (RK4) :}
-\smallskip
-$$\left\{
-\begin{array}{l}
-k_{n,1}=f(t_n,u_n)\\
-k_{n,2}=f(t_{n+1/2},u_n+\frac{h}{2}k_{n,1})\\[0.2cm]
-k_{n,3}=f(t_{n+1/2},u_n+\frac{h}{2} k_{n,2})\\[0.2cm]
-k_{n,4}=f(t_{n+1},u_n+h k_{n,3})\\[0.2cm]
-u_{n+1}=u_n+\frac{h}{6}\bigl( k_{n,1}+2 k_{n,2}+2 k_{n,3}+k_{n,4}\bigl),
-\end{array}\right.
+\subsection*{Méthode de Runge-Kutta (RK4) :} (disponible dans \cmd{tp4\_fonction.sci})\newline
 $$
+  \begin{cases}
+    k_{n,1}=f(u_n)\\
+    k_{n,2}=f(u_n+\frac{h}{2}k_{n,1})\\[0.2cm]
+    k_{n,3}=f(u_n+\frac{h}{2} k_{n,2})\\[0.2cm]
+    k_{n,4}=f(u_n+h k_{n,3})\\[0.2cm]
+    u_{n+1}=u_n+\frac{h}{6}\bigl( k_{n,1}+2 k_{n,2}+2 k_{n,3}+k_{n,4}\bigl),
+  \end{cases}
+$$
+
 avec $u_0$ pour condition initiale.
 
-Pour les m\'ethodes implicites, il faut aussi programmer la m\'ethode de Newton pour r\'esoudre l'\'equation 
-$\Phi (Y) = 0$ (\'equation non lin\'eaire scalaire ou vectorielle).
+% ==================================
+\section{La méthode d'Euler explicite }
+% ==================================
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{La m\'ethode d'Euler explicite }
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{exo} La m\'ethode d'Euler explicite : le cas scalaire
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% --------------------------------------------
+\begin{exo} (La méthode d'Euler explicite)
+% --------------------------------------------
+  \begin{enumerate}\label{ex:euler}
+
+    \item Programmer la méthode d'Euler explicite \sclb{[U]=EulerExplicite(f,T,N,U0)} qui étant donnés une fonction \sclb{f}, la borne supérieur \sclb{T} de l'intervalle $[0,T]$, le nombre de subdivisions \sclb{N} de cette intervalle et la condition initiale \sclb{U0} (qui est un vecteur colonne), retourne une matrice \sclb{U} dont les $N+1$ colonnes représente les valeurs approchées (en particulier \sclb{U[1]} = \sclb{U0}).
+
+    Cette méthode est à mettre dans \cmd{tp4\_fonction.sci} et sera utilisé à plusieurs reprises dans ce TP.
+
+    \item On considère le problème de Cauchy suivant :
+      $$
+        \begin{cases}
+          y'(t)=-10y(t), \quad t \in [0,1], \\
+          y(0)=2.
+        \end{cases}
+      $$
+    Définissez une fonction \sclb{solex} qui est la solution exacte de ce problème.
+
+    \item Tracer sur une même figure la solution exacte et les solutions approchées obtenues par la méthode d'Euler explicite pour $N=2^{k}$ avec $k=4,\dots,10$.
+
+    \item\label{q:oceuler} Comme la solution exacte $y$ du problème est ${\mathcal{C}}^{2}$, on rappelle que la méthode d'Euler explicite vérifie :
+    $$
+      \max_{0 \leq n \leq N} |y_n-y(t_n)|\leq C h \sup_{0 \leq t \leq T} |y^{(2)}(t)|.
+    $$
+    Dans une autre figure, tracer la norme infinie de l'erreur commise en échelle \og{}log-log\fg{} en fonction du pas $h=T/N$, pour les même $N=2^{k}$ avec $k=4,\dots,10$, ainsi qu'une droite de pente 1.
+    Que constatez-vous?
+    \item
+    On considère les deux problèmes de Cauchy suivants :
+    $$
+      \begin{cases}
+        y'(t)=3y(t), \quad t \in [0,20], \\
+        y(0)=1/3.
+      \end{cases}
+      , \quad
+      \begin{cases}
+        y'(t)=-3y(t), \quad t \in [0,20], \\
+        y(0)=1/3.
+      \end{cases}
+    $$
+    Quelle sont les solutions exactes de ces deux problèmes ? Mettre en évidence  pour chacune d'entre elles la sensibilité de la solution numérique par rapport à une petite perturbation aléatoire dans la condition initiale. Pour cela effectuer une résolution par la méthode d'Euler explicite avec $y(0)= 1/3 + \varepsilon$, où $\varepsilon \leq 10^{-7}$ est une perturbation aléatoire. Représenter les résultats et commenter les.
+  \end{enumerate}
+\end{exo}
+
+% ==================================
+\section{Comparaison  de quelques schémas numériques}
+% ==================================
+
+
+% --------------------------------------------
+\begin{exo} (Ordres de convergence)
+% --------------------------------------------
+
+  On se propose dans cette exercice de comparer les ordres de convergence des différentes méthodes décrites dans l'introduction de cette feuille.
+
+  On rappelle que, en supposant que les solutions $y$ de l'équation différentielles soient de classe ${\mathcal{C}}^{p+1}$, une méthode numérique est d'ordre de convergence $p$ si :
+    $$
+      \max_{0 \leq n \leq N} |y_n-y(t_n)|\leq C h^p \sup_{0 \leq t \leq T} |y^{(p+1)}(t)|.
+    $$
+  Trois des méthodes dont on aura besoin, Euler implicite, Crank-Nicolson et Runge-Kutta 4, sont fournies dans le fichier \cmd{tp4\_fonction.sci}. Les deux méthodes implicites exige comme paramètre, en plus de la fonction \sclb{f}, sa dérivée \sclb{Df} pour pouvoir résoudre l'équation de récurrence grâce à la méthode de Newton.
+  \begin{enumerate}
+    \item
+    En plus de la méthode d'Euler explicite déjà implémentée, programmer les méthodes d'Euler amélioré \sclb{[U]=EulerAmeliore(f,T,N,U0)} et de Heun \sclb{[U]=Heun(f,T,N,U0)}.
+    \item On considère l'équation différentielle linéaire :
+      $$
+        \begin{cases}
+          y'(t) = -y(t), \; t \in [0,5],\\
+          y(0) = 2.
+        \end{cases}
+      $$
+    Comme dans \ref{ex:euler}.\ref{q:oceuler}), on se propose de résoudre, puis évaluer les erreurs commises en norme infinie pour tous les méthodes, les trois que vous avez programmées et les trois fournies.
+    Pour cela, faire les calculs pour $N=2^{k}$ avec $k=4,\dots,10$. Puis mettre en évidence  les ordres de convergence en traçant, sur un même graphique, la norme infinie de l'erreur commise en échelle \og{}log-log\fg{} pour chacune de ces méthodes, ainsi que 3 droites respectivement de pente $1$, $2$ et $4$.\newline
+    Que constatez-vous?
+  \end{enumerate}
+\end{exo}
+
+
+
+% ==================================
+\section{Systèmes différentiels à coefficients constants}
+% ==================================
+
+
+% --------------------------------------------
+\begin{exo} (Un problème raide)
+% --------------------------------------------
+
+On considère le système :
+  $$
+    \begin{cases}
+      y'_1(t) = y_2(t),\\
+      y'_2(t) = -\lambda_1 \, \lambda_2 y_1(t)+(\lambda_1+\lambda_2) y_2(t),
+    \end{cases}
+  $$
+avec $\lambda_1$ et $\lambda_2$ deux réels négatifs distincts tels que $|\lambda_1| >> |\lambda_2|$. On  cherche à calculer la solution sur $[0,20]$.
+
+On fixe pour cet exercice $\lambda_1=-100$, $\lambda_2=-1$ et la condition initiale $y_{1}(0)=y_{2}(0)=1$.
 \begin{enumerate}
-\item
-On consid\`ere le probl\`eme de Cauchy suivant :
-$$
-\left\{
-\begin{array}{lcl}
-y'(t)=-10y(t), \quad t \in [0,1], \\
-y(0)=2.
-\end{array}
-\right.
-$$
-En programmant la m\'ethode d'Euler explicite pour la r\'esolution de ce probl\`eme, mettre en \'evidence l'ordre de convergence de la m\'ethode, en prenant le pas de discr\'etisation uniforme $h=1/2^k$, $k=4,\dots,10$. 
-En supposant $y \in {\mathcal{C}}^{2}$, on rappelle que la m\'ethode d'Euler explicite v\'erifie :
-$$
-\max_{0 \leq n \leq N} |y_n-y(t_n)|\leq C h \sup_{0 \leq t \leq T} |y^{(2)}(t)|.
-$$
-Tracer dans une figure la solution exacte avec pas $h=2^{-10}$ et la solution approch\'ee avec diff\'erents pas $h$.
-Dans une autre figure, tracer la norme infinie de l'erreur commise en \'echelle "log-log" ainsi qu'une droite de pente 1. 
-Que constatez-vous?
-\item
-On consid\`ere les deux probl\`emes de Cauchy suivants :
-$$
-\left\{
-\begin{array}{lcl}
-y'(t)=3y(t)-3t, \quad t \in [0,20], \\
-y(0)=1/3.
-\end{array}
-\right.
-, \quad 
-\left\{
-\begin{array}{lcl}
-y'(t)=-3y(t)+3t, \quad t \in [0,20], \\
-y(0)=1/3.
-\end{array}
-\right.
-$$
-Comparer les solutions exactes de ces deux probl\`emes, puis mettre en \'evidence  pour chacun d'entre eux la sensibilit\'e de la solution num\'erique par rapport \`a une petite perturbation dans la condition initiale en effectuant une r\'esolution par la m\'ethode d'Euler explicite (consid\'erer $y(0)= 1/3 + \epsilon$, avec $\epsilon \approx 10^{-15}$ et le pas de discr\'etisation uniforme $h=0.01$).
+  \item En utilisant la fonction \sclb{expm} donner la solution exacte du problème \sclb{y=solex(t)}.
+  \item Résoudre le problème par les méthodes d'Euler explicite, d'Euler implicite et de Runge-Kuta pour les nombres de subdivisions $N = 966$, $N = 1030$ et $N = 2000$. Pour chaque $N$ tracer sur un graphique la norme de $Y_{n}$ et sur un autre graphique la trajectoire de $Y_{n}$.
+  Que constatez-vous?
+
+  \textit{Indication : Pour les méthodes itératives sur $\mathbb{R}^{n}$, la \og{}dérivée\fg{} \sclb{Df} est la matrice jacobienne de \sclb{f}.}
 \end{enumerate}
 \end{exo}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Comparaison  de quelques sch\'emas num\'eriques}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{exo} Ordres de convergence
-%%%%%%%%%%%%%%%%%%
+% --------------------------------------------
+\begin{exo} Modèle de Lotka-Volterra
+% --------------------------------------------
 
-On consid\`ere l'\'equation diff\'erentielle lin\'eaire :
-$$
-\left\{
-\begin{array}{rcl}
-y'(t)&=&-y(t), \; t \in [0,5],\\
-y(0)&=&2.
-\end{array}
-\right.
-$$
-On d\'esire mettre en oeuvre quelques m\'ethodes num\'eriques pour l'approximation de la solution de cette \'equation diff\'erentielle. 
-On se donne $h$ le pas de la subdivision uniforme $(t_n)_{n=0,..N}$ de l'intervalle $[0,5]$, on note $t_n=n\, h$ et $y_n$ une approximation de $y(t_n)$. On rappelle, en supposant $y \in {\mathcal{C}}^{p+1}$, qu'une m\'ethode num\'erique est d'ordre de convergence $p$ si :
-$$
-\max_{0 \leq n \leq N} |y_n-y(t_n)|\leq C h^p \sup_{0 \leq t \leq T} |y^{(p+1)}(t)|.
-$$
-\begin{enumerate}
-\item En plus de la m\'ethode d'Euler explicite d\'ej\`a impl\'ement\'ee, programmer les m\'ethodes d'Euler am\'elior\'e et de Heun.
-\item Consid\'erer les m\'ethodes d'Euler implicite, de Crank-Nicolson et de Runge-Kutta 4, fournies dans le fichier {\tt tp\_EDO\_functions.sci} pour la r\'esolution de cette EDO en prenant le pas de temps $h=1/2^k$, $k=4,\dots,10$. 
-Mettre en \'evidence  les ordres de convergence de chacune de ces m\'ethodes en tra\c cant la norme infinie de l'erreur commise en \'echelle "log-log" pour chacune de ces m\'ethodes ainsi que 3 droites respectivement de pente 1, 2 et 4. 
-Que constatez-vous?
-\end{enumerate}
-\end{exo}
+  On veut appliquer les méthodes d'Euler explicite, d'Euler implicite, d'Euler amélioré, de Heun, de Crank-Nicolson et de Runge-Kutta 4
+  à la résolution du modèle de Lotka-Volterra :
+    $$
+      \begin{cases}
+        x' =ax-bxy\\
+        y' =-cy+dxy
+      \end{cases}
+    $$
+  Pour cet exercices on fixe les constantes et la condition initiale comme suit :
+    $$
+    a=3,\ b=1,\ c=2,\ d=1,\ x(0)=1,\ y(0)=2.
+    $$
+  \begin{enumerate}
+    \item Calculer la solution sur l'intervalle $[0,T]$, \sclb{T=10}, avec \sclb{N = 200} subdivisions. Représenter la solution numérique de chaque méthode dans le plan de phase $(x,y)$ (marquer le point initiale). Commenter les résultats.
+    \item On veut comparer les méthodes d'Euler amélioré, de Heun, de Crank-Nicolson et de Runge-Kutta 4 sur un intervalle plus longue $[0,T]$, \sclb{T=100}. Pour faire cela, traçer sur un même graphique l'évolution en temps de l'intégrale première
+      $$
+        H(x,y) = dx -c \ln x + by -a \ln y,
+      $$
+    avec le même pas de discrétisation constant qua dans la question précédente . Discuter la stabilité de ces méthodes quand le temps $T$ devient grand.
 
-\begin{exo} Et si on explose en temps fini ?
-%%%%%%%%%%%%%%%%%%%%%%%
-
-On consid\`ere l'\'equation diff\'erentielle :
-$$
-\left\{
-\begin{array}{lcl}
-u'(t)&=&u^2(t), \\
-u(0)&=&1.
-\end{array}
-\right.
-$$
-\begin{enumerate}
-\item Donner la solution maximale de cette \'equation diff\'erentielle.
-\item
-Donner explicitement la valeur de $u_{n+1}$ en fonction de $u_n$ lorsque cette \'equation 
-diff\'erentielle est r\'esolue avec le sch\'ema d'Euler implicite. Quelle restriction doit-on observer sur le pas de temps $h$ ?  
-Proposer alors une strat\'egie mettant en oeuvre un pas de temps variable, qui d\'etecte l'explosion de la solution et s'arr\^ete \`a temps avant l'obtention d'une erreur d'execution.
-\item Donner explicitement la valeur de $u_{n+1}$ en fonction de $u_n$ lorsque cette \'equation 
-diff\'erentielle est r\'esolue avec le sch\'ema de Crank-Nicolson. Quelle restriction doit-on observer sur le pas de temps $h$ ?  
-Proposer alors une strat\'egie mettant en oeuvre un pas de temps variable, qui d\'etecte l'explosion de la solution et s'arr\^ete \`a temps avant l'obtention d'une erreur d'execution.
-\item Programmer le sch\'ema d'Euler explicite avec un pas de temps variable. Soit $h_0=0.01$ et $\mu=10^{-4}$.
-On fixe un encadrement $[h_{min},h_{max}]=[0.1 h_0, 5 h_0]$ et on choisit $h_n \in [h_{min},h_{max}]$ selon le crit\`ere :
-\begin{enumerate}
-\item si $\frac \mu 3 \leq \frac{|e^*_n|}{h_n} \leq \mu$, alors $h_{n+1}=h_n$ ;
-\item si $\frac{|e^*_n|}{h_n} < \frac \mu 3$, alors $h_{n+1}=\min(1.1 h_n,h_{max})$ ;
-\item si $\frac{|e^*_n|}{h_n} > \mu$, alors $h_{n+1}=\max(0.9 h_n,h_{min})$.
-\end{enumerate}
-Pour calculer $e^*_n$, approximation de l'erreur \`a l'\'etape $n$, il faut :
-\begin{enumerate}
-\item \'evaluer $p_n=f(t_n,y_n)$ et $p_{n+1}=f(t_n+h_n,y_n+h_n p_n)$ ;
-\item calculer l'approximation de l'erreur $\frac{e^*_n}{h_n}= \frac{(p_{n+1}-p_n)}{2}$. 
-\end{enumerate}
-On remarque que ceci ne n\'ecessite aucun calcul suppl\'ementaire car $p_{n+1}$ est de toute fa\c con n\'ecessaire pour l'\'etape suivante.
-\item
-Comparer les diff\'erents sch\'emas. Quels sont les avantages et inconv\'enients de chacun d'entre eux ? 
-D'apr\`es les erreurs num\'eriques observ\'ees, quel vous semble le sch\'ema le plus adapt\'e pour la r\'esolution de cette \'equation diff\'erentielle ?
-\end{enumerate}
-\end{exo}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Syst\`emes diff\'erentiels \`a coefficients constants}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{exo} Les probl\`emes raides
-%%%%%%%%%%%%%%%%%%
-
-On consid\`ere le syst\`eme :
-$$
-\left\{
-\begin{array}{lcl}
-y'_1(t)&=&y_2(t),\\
-y'_2(t)&=&-\lambda_1 \, \lambda_2 y_1(t)+(\lambda_1+\lambda_2) y_2(t),
-\end{array}
-\right.
-$$
-avec $y_1(0)=y_{1,0}$, $y_2(0)=y_{2,0}$, $\lambda_1$ et $\lambda_2$ deux r\'eels n\'egatifs distincts tels que $|\lambda_1| >> |\lambda_2|$. On  cherche \`a calculer la solution sur $]0,20[$.
-\begin{enumerate}
-\item Donner la solution analytique du probl\`eme.
-\item En prenant $\lambda_1=-100$, $\lambda_2=-1$, $y_{1,0}=y_{2,0}=1$, r\'esoudre le probl\`eme par la m\'ethode d'Euler explicite en prenant d'abord $h=0.0207$ puis $h=0.0194$ et $h=0.01$. Que constatez-vous? 
-R\'esoudre le m\^eme probl\`eme par la m\'ethode d'Euler implicite en prenant $h=0.1$. Que constatez-vous?
-\end{enumerate}
-\end{exo}
-
-\begin{exo} Mod\`ele de Lotka-Volterra
-%%%%%%%%%%%%%%%%%%%%%
-
-On veut appliquer les m\'ethodes d'Euler explicite, d'Euler implicite, d'Euler am\'elior\'e, de Heun, de Crank-Nicolson et de Runge-Kutta 4
-\`a la r\'esolution du mod\`ele de Lotka-Volterra :
- $$
- \left\{\begin{aligned}
-x' \ =ax-bxy,\\
-y'=-cy+dxy,
- \end{aligned}
- \right.
- \quad\mbox{ avec } x(0)=x_0,\ y(0)=y_0.
- $$
- Pour la simulation num\'erique, on pourra prendre :
- $$
- a=3,\ b=1,\ c=2,\ d=1,\ x_0=1,\ y_0=2.
- $$
-\begin{enumerate}
-\item Calculer la solution sur l'intervalle $[0,T], T=10$ avec un pas de discr\'etisation constant $h= 0.05$.
-Repr\'esenter la solution num\'erique de chaque m\'ethode dans le plan de phase $(x,y)$ (rep\'erer par un $\oplus$ la condition initiale).
-Commenter les r\'esultats.
-\item On veut comparer les m\'ethodes d'Euler am\'elior\'e, de Heun, de Crank-Nicolson et de Runge-Kutta 4 sur l'intervalle $[0,T], T=100$. Pour faire cela, 
-tra\c cer l'\'evolution en temps de l'int\'egrale premi\`ere $H(x,y) = dx -c \ln x + by -a \ln y$, avec un pas de discr\'etisation 
-constant $h= 0.05$. Discuter de la stabilit\'e de ces m\'ethodes quand le temps $T$ devient grand.
-\end{enumerate}
+    \textit{Rappel : L'intégrale premier $H(x,y)$ est constant le long des solutions du système.}
+  \end{enumerate}
 \end{exo}
 
 \end{document}
