@@ -2,7 +2,7 @@
 //
 // TP4 : Fonctions
 //
-// Ce fichier contient une procédure pour le TP4
+// Ce fichier contient les procédures pour le TP4
 //
 //============================================
 
@@ -14,6 +14,7 @@
 
 // Runge-Kutta
 // ====================
+// - L'équation différentielle à résoudre est de la forme u'=f(u)
 // - f est une fonction qui prend un paramètre vecteur colonne
 //    et renvoie un vecteur colonne de la même taille
 // - On subdivise l'intervalle [0,T] à N sous-intervalles
@@ -52,6 +53,7 @@ endfunction
 
 // Euler implicite
 // ====================
+// - L'équation différentielle à résoudre est de la forme u'=f(u)
 // - f est une fonction qui prend un paramètre vecteur colonne
 //    et renvoie un vecteur colonne de la même taille
 // - Df est la fonction dérivée de f (ou la jacobienne dans le cas de R^n),
