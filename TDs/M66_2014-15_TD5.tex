@@ -1,0 +1,131 @@
+\documentclass[a4paper,12pt,reqno]{amsart}
+\usepackage{macros_M66}
+\newgeometry{top=21mm,left=23mm,right=21mm,bottom=21mm, nohead, nofoot}
+
+\renewcommand{\theequation}{\fnsymbol{equation}}
+
+\begin{document}
+\hautdepage{TD5: Consistance, Stabilité, Convergence}
+
+
+%-----------------------------------
+\begin{exo}\label{exo:RKI}
+
+  Soit le problème:
+  \[(P)
+  \begin{cases}
+  y'=f(t,y),\ t\in I_0,\\
+  y(t_0)=\eta,
+  \end{cases}
+  \]
+  où $I_0=[t_0,t_0+T]$ et $f$ est une fonction de classe $\mathcal{C}^1(I_0\times\R,\R)$ et globalement lipschitzienne. Considérons la méthode de Runge-Kutta implicite, de matrice $A=(a_{ij})_{1\leq i,j\leq q}$:
+  \[
+    \left\{
+      \begin{aligned}
+        y_{n,i} &= y_n + h_n\sum_{j=1}^q a_{ij}f(t_{n,j},y_{n,j}), \; 1\leq i\leq q,\\
+        y_{n+1} &= y_n + h_n\sum_{j=1}^q b_jf(t_{n,j},y_{n,j}),
+      \end{aligned}
+    \right.
+  \]
+  où $h_n = t_{n+1} - t_n$, $t_{n,j} = t_n+ \tau_j h_n$, et où l'on suppose que, pour tout $1 \leq j \leq q$, $\displaystyle \sum_{k=1}^q a_{jk}=\tau_j$.
+
+  \begin{enumerate}
+    \item On admet que, pour $h_n$ suffisamment petit, le système en $(y_{n,i})_{i=1,\ldots,q}$ admet une unique solution $y_{n,i}=\Phi_i(t_n,y_n,h_n) \in \mathcal{C}^1(I_0 \times \R \times [0,\varepsilon[, \R)$, $i=1,\ldots,q$.\\
+    Déterminer $\Phi$, en fonction de $\Phi_j$, $b_j$ et $\tau_j$, tel que le schéma ci-dessus soit sous la forme \[y_{n+1} = y_{n} + h_n \Phi (t_n,y_n,h_n).\]
+
+    \item Montrer que $\displaystyle \Phi(t,y,0) = f(t,y) \sum_{j=1}^q b_j$. En déduire une condition nécessaire et suffisante pour que le schéma soit d'ordre au moins 1.
+
+    \item Montrer que $\partial_{h} \Phi_{i} (t,y,0) = \sum_{j=1}^{q} a_{ij}f(t,y)$ pour $i=1,\ldots,q$. En déduire une condition nécessaire et suffisante pour que la méthode soit d'ordre au moins 2.
+
+    \item {\bf Un exemple concret.} On considère la méthode définie par
+    \[
+      \left\{
+        \begin{aligned}
+          y_{n+\frac{1}{3}} & = y_n + \frac{h}{6}\left(f(t_n,y_n) +  f(t_{n+\frac{1}{3}},y_{n+\frac{1}{3}})\right), \\
+          y_{n+1} & = y_n + \frac{h}{4} \left(3f(t_{n+\frac{1}{3}},y_{n+\frac{1}{3}})+ f(t_{n+1},y_{n+1})\right),
+        \end{aligned}
+      \right.
+    \]
+    où $t_{n+\frac{1}{3}} = t_{n}+\frac{h}{3}$ et $f:[t_0,t_0+a]\times\R\rightarrow\R$ est $\mathcal{C}^1$ et globalement $L$-lipschitzienne par rapport à $y$. On admettra que, pour $h$ suffisamment petit, ce système admet une unique solution $\mathcal{C}^{1}$ par rapport aux données. Montrer que cette méthode est consistante d'ordre au moins égal à 2, puis qu'elle est convergente.
+  \end{enumerate}
+
+
+\end{exo}
+
+%-----------------------------------
+\begin{exo}
+
+  On considère l'équation différentielle
+    \[
+      x'(t) = f\big(t,x(t)\big),\ t\in I_0= [0,T],
+    \]
+  munie de la donnée de Cauchy $x(0) = x_0$, et où la fonction $f$ est continue de $I_0\times\R^m$ dans $\R^m$ et L-lipschitzienne par rapport à la variable $x$.
+
+  On s'intéresse à la résolution numérique de l'équation sur une discrétisation  $0=t_0< t_1<\cdots< t_N = T$ de pas maximal $h=\max h_n$ à l'aide de l'un des deux schémas:
+  \[
+    \left\{
+      \begin{aligned}
+        X_{n+1/2} &= X_n +\frac{h_n}{2} f(t_{n}, X_{n}) \\
+        X_{n+1}   &= X_n +{h_n} f(t_{n+1/2}, X_{n+1/2})
+      \end{aligned}
+    \right.,
+    \qquad
+    \left\{
+      \begin{aligned}
+        Y_{n+1/2} &= \frac{Y_n +Y_{n+1}}{2} \\
+        Y_{n+1}   &= Y_n + h_n f(t_{n+1/2}, Y_{n+1/2})
+      \end{aligned}
+    \right.,
+  \]
+  où on a noté $t_{n+1/2} = \dfrac{t_n +t_{n+1}}{2} =t_n +  \dfrac{h_n}{2}$.
+
+  \begin{enumerate}
+    \item Écrire  chacun de  ces  schémas sous la forme d'une méthode de Runge-Kutta.
+
+    \item Pour une même discrétisation, lequel des deux schémas est plus coûteux numériquement? Sous quelle condition sur $h$ ces schémas définissent-ils $X_n$ et $Y_n$ de façon unique?
+
+    \item Montrer qu'ils sont tous les deux d'ordre au moins 2. Sont-ils stables? Convergents?
+
+    \item On considère le cas $f(t,x) = -\lambda x$ où $\lambda \in \mathbb{C}_{+}^{*}$ est un nombre complexe de partie réelle strictement positive. On suppose que la discrétisation est uniforme de pas $h$ et on s'intéresse à la résolution numérique de l'équation différentielle sur $\R_+$. Montrer que, pour chacun des deux schémas, on peut écrire
+      \[
+        X_{n+1} = r_X(\lambda h) X_n,\qquad Y_{n+1} = r_Y(\lambda h) Y_n,
+      \]
+    où $r_{W}(z)$, $W\in\{X,Y\}$, est une fraction rationnelle que l'on calculera pour chacun des schémas. On appelle domaine de A-stabilité l'ensemble
+      \[
+        D_{W}=\{z\in\C\ |\ |r_{W}(z)|\leq 1\},
+      \]
+    et on dit que la méthode est A-stable si $\mathbb{C}_{+}^{*}\subset D_{W}$.\\
+    Montrer que $D_X$ est un compact de $\C$. Déterminer $D_Y$. Les méthodes sont-elles A-stables? Quel schéma choisiriez-vous pour  intégrer l'équation différentielle sur un intervalle de temps très grand?
+
+    \item On suppose que l'équation différentielle est posée sur $\C^m$ et que $f(t,x) = -Ax$ où $A$ est une matrice carrée de taille $m$ qu'on supposera diagonalisable. Sous quelle condition sur $A$ la solution $t\mapsto x(t)$ reste-t-elle bornée sur $\R_+$? Calculer $X_n$, $Y_n$ en fonction de $X_0$, $Y_0$. Sous quelle condition sur le pas $h$ les suites $(X_n)$ et $(Y_n)$ restent-elles bornées?
+  \end{enumerate}
+\end{exo}
+
+%-----------------------------------
+\begin{exo}
+
+  On considère le schéma de Runge-Kutta implicite suivant:
+  \begin{equation} \label{eq:RK}
+    \left\{
+      \begin{aligned}
+        X_{n+\frac13} &  = X_n + \frac h6\left(f(t_n,X_n) + f(t_{n+\frac13},X_{n+\frac13})\right), \\
+        X_{n+1}       &  = X_n + \frac h4\left(3f(t_{n+\frac13},X_{n+\frac13}) + f(t_{n+1},X_{n+1})\right),
+      \end{aligned}
+    \right.
+  \end{equation}
+  où $t_{n+1/3} = (n+1/3)h$. On rappelle (voir Exercice \ref{exo:RKI}) que ce schéma est d'ordre au moins 2.
+  \begin{enumerate}
+    \item Soit $Y$ une solution de l'équation différentielle $Y' = - \lambda Y$ où $\lambda$ est un complexe quelconque. Soit $(Y_n)$ une solution du schéma \eqref{eq:RK} associé à cette équation différentielle. Montrer que
+      \[
+        Y_{n+1} = r(\lambda h) Y_n,
+      \]
+    où $r$ est donnée par
+      \[
+        r(z) = \frac{24 - 14 z + 3 z^2}{24 + 10 z + z^2}.
+      \]
+    \item Le schéma \eqref{eq:RK} est-il A-stable?
+  \end{enumerate}
+\end{exo}
+
+
+\end{document}
